@@ -1,0 +1,1819 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Paywall - Web Components</title>
+
+    <!-- CSS Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap-utilities.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+
+</head>
+
+<style>
+    /* Variables */
+    :root {
+        --black: #000000;
+        --blue-color-hover: #2E86C1;
+        --blue-color: #2575e8;
+        --gray-hover: #cccccc;
+        --gray: #b1b1b1;
+        --green: #00bf07;
+        --line-darkgray-color: #707070;
+        --line-lightgray-color: #cccccc;
+        --text-color: #2c2c2c;
+        --white: #ffffff;
+
+        --bs-blue: #0d6efd;
+        --bs-indigo: #6610f2;
+        --bs-purple: #6f42c1;
+        --bs-pink: #d63384;
+        --bs-red: #dc3545;
+        --bs-orange: #fd7e14;
+        --bs-yellow: #ffc107;
+        --bs-green: #198754;
+        --bs-teal: #20c997;
+        --bs-cyan: #0dcaf0;
+        --bs-white: #fff;
+        --bs-gray: #6c757d;
+        --bs-gray-dark: #343a40;
+        --bs-gray-100: #f8f9fa;
+        --bs-gray-200: #e9ecef;
+        --bs-gray-300: #dee2e6;
+        --bs-gray-400: #ced4da;
+        --bs-gray-500: #adb5bd;
+        --bs-gray-600: #6c757d;
+        --bs-gray-700: #495057;
+        --bs-gray-800: #343a40;
+        --bs-gray-900: #212529;
+        --bs-primary: #0d6efd;
+        --bs-secondary: #6c757d;
+        --bs-success: #198754;
+        --bs-info: #0dcaf0;
+        --bs-warning: #ffc107;
+        --bs-danger: #dc3545;
+        --bs-light: #f8f9fa;
+        --bs-dark: #212529;
+        --bs-primary-rgb: 13, 110, 253;
+        --bs-secondary-rgb: 108, 117, 125;
+        --bs-success-rgb: 25, 135, 84;
+        --bs-info-rgb: 13, 202, 240;
+        --bs-warning-rgb: 255, 193, 7;
+        --bs-danger-rgb: 220, 53, 69;
+        --bs-light-rgb: 248, 249, 250;
+        --bs-dark-rgb: 33, 37, 41;
+        --bs-white-rgb: 255, 255, 255;
+        --bs-black-rgb: 0, 0, 0;
+        --bs-body-color-rgb: 33, 37, 41;
+        --bs-body-bg-rgb: 255, 255, 255;
+        --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+        --bs-body-font-family: var(--bs-font-sans-serif);
+        --bs-body-font-size: 1rem;
+        --bs-body-font-weight: 400;
+        --bs-body-line-height: 1.5;
+        --bs-body-color: #212529;
+        --bs-body-bg: #fff
+    }
+
+    /* Generals */
+    body,
+    a {
+        color: var(--text-color);
+    }
+
+    .row {
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+    }
+
+    .btn {
+        display: inline-block;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #212529;
+        text-align: center;
+        text-decoration: none;
+        vertical-align: middle;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+        background-color: transparent;
+        border: 1px solid transparent;
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        border-radius: 0.25rem;
+        transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+
+    .btn-outline-light {
+        color: #f8f9fa;
+        border-color: #f8f9fa;
+    }
+
+    .btn-outline-light:hover {
+        color: #000;
+        background-color: #f8f9fa;
+        border-color: #f8f9fa;
+    }
+
+    .btn-check:focus+.btn-outline-light,
+    .btn-outline-light:focus {
+        box-shadow: 0 0 0 0.25rem rgba(248, 249, 250, 0.5);
+    }
+
+    .btn-check:checked+.btn-outline-light,
+    .btn-check:active+.btn-outline-light,
+    .btn-outline-light:active,
+    .btn-outline-light.active,
+    .btn-outline-light.dropdown-toggle.show {
+        color: #000;
+        background-color: #f8f9fa;
+        border-color: #f8f9fa;
+    }
+
+    .btn-check:checked+.btn-outline-light:focus,
+    .btn-check:active+.btn-outline-light:focus,
+    .btn-outline-light:active:focus,
+    .btn-outline-light.active:focus,
+    .btn-outline-light.dropdown-toggle.show:focus {
+        box-shadow: 0 0 0 0.25rem rgba(248, 249, 250, 0.5);
+    }
+
+    .btn-outline-light:disabled,
+    .btn-outline-light.disabled {
+        color: #f8f9fa;
+        background-color: transparent;
+    }
+
+    .form-control {
+        display: block;
+        width: 100%;
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #212529;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border-radius: 0.25rem;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+
+    .form-floating {
+        position: relative;
+        text-align: left;
+    }
+
+    .form-floating>.form-control,
+    .form-floating>.form-select {
+        height: calc(3.5rem + 2px);
+        line-height: 1.25;
+    }
+
+    .form-floating>label {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        padding: 1rem 0.75rem;
+        pointer-events: none;
+        border: 1px solid transparent;
+        transform-origin: 0 0;
+        transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out;
+    }
+
+    /* Wrappers */
+
+    .offers {
+        background-color: var(--blue-color);
+        background-image: url('https://www.estadao.com.br/paywall-zephr/assets/image/grade_bolas_azul.png');
+        background-position: top 3% left 5%;
+        background-repeat: no-repeat;
+    }
+
+    .offers .desktops {
+        height: 120px;
+    }
+
+    .gifts-subscription-image img {
+        border-radius: 0 0 18px 18px;
+    }
+
+    .subscription-offers .gifts-subscription a {
+        color: var(--white);
+    }
+
+    .subscription-offers.pt-3.mt-2.position-relative a {
+        color: #fff;
+    }
+
+    /* Forms */
+    .form-floating>.form-control {
+        height: 50px;
+    }
+
+    .form-floating>label {
+        padding: .5rem .75rem;
+    }
+
+    .info .badge {
+        right: -20px;
+        top: 184px;
+        padding-top: 8px;
+        height: 2.5em;
+        width: 2.5em;
+        color: #fff;
+        z-index: 1;
+        font-size: 14px;
+    }
+
+    .badge-responsive {
+        padding: 0.35em 0.65em;
+        font-size: .75em;
+        font-weight: 700;
+        line-height: 1;
+        color: #fff;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: baseline;
+        top: -15px;
+        height: 3em;
+        width: 3em;
+    }
+
+    .keepin-conected {
+        font-size: 12px !important;
+    }
+
+    .forget-password {
+        font-size: 12px !important;
+        color: var(--blue-color);
+    }
+
+    .forget-password:hover {
+        text-decoration: underline;
+    }
+
+    /* Helpers */
+    .icon-password-login,
+    .icon-password-register {
+        color: var(--text-color);
+        position: absolute;
+        top: 14px;
+        right: 10px;
+    }
+
+    .message {
+        color: var(--green);
+    }
+
+    /* Buttons */
+    .buttom__active {
+        background-color: var(--blue-color);
+        border-color: var(--blue-color);
+        color: var(--white);
+        letter-spacing: 2px;
+    }
+
+    .buttom__active:hover {
+        background-color: var(--blue-color-hover);
+        border-color: var(--blue-color-hover);
+        color: var(--white);
+        letter-spacing: 2px;
+    }
+
+    .buttom__disable {
+        background-color: var(--gray);
+        border-color: var(--gray);
+        color: var(--white);
+        letter-spacing: 2px;
+        cursor: not-allowed;
+    }
+
+    .buttom__back {
+        background-color: none;
+        border-color: none;
+        color: var(--blue-color);
+        letter-spacing: 2px;
+    }
+
+    .buttom__back:hover {
+        background-color: none;
+        border-color: none;
+        color: var(--blue-color-hover);
+        letter-spacing: 2px;
+    }
+
+    .buttom__form {
+        border: 1px solid var(--line-darkgray-color);
+    }
+
+    .buttom__form__error {
+        border: 1px solid var(--bs-danger);
+    }
+
+    .buttom__form__error::placeholder {
+        color: var(--bs-danger);
+    }
+
+    .message_error{
+        font-weight: bolder;
+        color: var(--bs-danger);
+    }
+
+    small.error__message{
+        color: var(--bs-danger);
+    }
+
+    /* CardsOffers */
+    .subscription-offers {
+        width: 160px;
+        min-width: 160px;
+        background-image: url('https://www.estadao.com.br/paywall-zephr/assets/image/efeito_card_promo.png');
+        background-color: var(--black);
+        background-repeat: no-repeat;
+        background-size: cover;
+        color: var(--white);
+        text-align: center;
+        border-radius: 20px;
+        box-shadow: 0px 0px 18px rgba(0, 0, 0, 0.5);
+        margin: 10px;
+        max-height: 220px;
+    }
+
+    .subscription-offers .badget-percent {
+        background-color: red;
+        border-radius: 0% 45% 0% 50%;
+        font-size: 10px;
+        padding: 5px 8px 2px 8px;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+    .subscription-offers .title {
+        margin-bottom: 20px;
+        margin-top: 25px;
+        font-size: 12px;
+        text-transform: uppercase;
+    }
+
+    .subscription-offers .observation {
+        font-size: 9px;
+     }
+
+    .subscription-offers .price {
+        margin-bottom: 5px;
+        font-size: 14px;
+    }
+
+    .subscription-offers .price>span {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+    .subscription-offers .message {
+        font-size: 12px;
+    }
+
+    .subscription-offers .gifts-subscription {
+        background-color: green;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        min-height: 35px;
+        border-radius: 0 0 16px 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .subscription-offers .gifts-subscription-image {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        border-radius: 0 0 16px 16px;
+        left: 0;
+    }
+
+    .fs-5 {
+        font-size: 18px !important;
+    }
+
+    .screen_loading{
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.644);
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+        position: absolute;
+        z-index: 1;
+    }
+    .icon__loading svg{
+        animation: rotating 2s linear infinite;
+    }
+    .icon__loading{
+        align-self: center;
+    }
+
+    /* Reboot Bootstrap - Override */
+    *,
+    ::after,
+    ::before {
+        box-sizing: border-box
+    }
+
+    @media (prefers-reduced-motion:no-preference) {
+        :root {
+            scroll-behavior: smooth
+        }
+    }
+
+    .discount-card-p {
+        margin-bottom: 0;
+    }
+
+    body {
+        margin: 0;
+        font-family: var(--bs-body-font-family);
+        font-size: var(--bs-body-font-size);
+        font-weight: var(--bs-body-font-weight);
+        line-height: var(--bs-body-line-height);
+        color: var(--bs-body-color);
+        text-align: var(--bs-body-text-align);
+        background-color: var(--bs-body-bg);
+        -webkit-text-size-adjust: 100%;
+        -webkit-tap-highlight-color: transparent
+    }
+
+    hr {
+        margin: 1rem 0;
+        color: inherit;
+        background-color: currentColor;
+        border: 0;
+        opacity: .25
+    }
+
+    hr:not([size]) {
+        height: 1px
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin-top: 0;
+        margin-bottom: .5rem;
+        font-weight: 500;
+        line-height: 1.2
+    }
+
+    h1 {
+        font-size: calc(1.375rem + 1.5vw)
+    }
+
+    @media (min-width:1200px) {
+        h1 {
+            font-size: 2.5rem
+        }
+    }
+
+    h2 {
+        font-size: calc(1.325rem + .9vw)
+    }
+
+    @media (min-width:1200px) {
+        h2 {
+            font-size: 2rem
+        }
+    }
+
+    h3 {
+        font-size: calc(1.3rem + .6vw)
+    }
+
+    @media (min-width:1200px) {
+        h3 {
+            font-size: 1.75rem
+        }
+    }
+
+    h4 {
+        font-size: calc(1.275rem + .3vw)
+    }
+
+    @media (min-width:1200px) {
+        h4 {
+            font-size: 1.5rem
+        }
+    }
+
+    h5 {
+        font-size: 1.25rem
+    }
+
+    h6 {
+        font-size: 1rem
+    }
+
+    p {
+        margin-top: 0;
+        margin-bottom: 1rem
+    }
+
+    abbr[data-bs-original-title],
+    abbr[title] {
+        -webkit-text-decoration: underline dotted;
+        text-decoration: underline dotted;
+        cursor: help;
+        -webkit-text-decoration-skip-ink: none;
+        text-decoration-skip-ink: none
+    }
+
+    address {
+        margin-bottom: 1rem;
+        font-style: normal;
+        line-height: inherit
+    }
+
+    ol,
+    ul {
+        /* padding-left: 2rem */
+    }
+
+    dl,
+    ol,
+    ul {
+        margin-top: 0;
+        margin-bottom: 1rem
+    }
+
+    ol ol,
+    ol ul,
+    ul ol,
+    ul ul {
+        margin-bottom: 0
+    }
+
+    dt {
+        font-weight: 700
+    }
+
+    dd {
+        margin-bottom: .5rem;
+        margin-left: 0
+    }
+
+    blockquote {
+        margin: 0 0 1rem
+    }
+
+    b,
+    strong {
+        font-weight: bolder
+    }
+
+    small {
+        font-size: .875em
+    }
+
+    mark {
+        padding: .2em;
+        background-color: #fcf8e3
+    }
+
+    sub,
+    sup {
+        position: relative;
+        font-size: .75em;
+        line-height: 0;
+        vertical-align: baseline
+    }
+
+    sub {
+        bottom: -.25em
+    }
+
+    sup {
+        top: -.5em
+    }
+
+    a {
+        color: #0d6efd;
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: #0a58ca
+    }
+
+    a:not([href]):not([class]),
+    a:not([href]):not([class]):hover {
+        color: inherit;
+        text-decoration: none
+    }
+
+    code,
+    kbd,
+    pre,
+    samp {
+        font-family: var(--bs-font-monospace);
+        font-size: 1em;
+        direction: ltr;
+        unicode-bidi: bidi-override
+    }
+
+    pre {
+        display: block;
+        margin-top: 0;
+        margin-bottom: 1rem;
+        overflow: auto;
+        font-size: .875em
+    }
+
+    pre code {
+        font-size: inherit;
+        color: inherit;
+        word-break: normal
+    }
+
+    code {
+        font-size: .875em;
+        color: #d63384;
+        word-wrap: break-word
+    }
+
+    a>code {
+        color: inherit
+    }
+
+    kbd {
+        padding: .2rem .4rem;
+        font-size: .875em;
+        color: #fff;
+        background-color: #212529;
+        border-radius: .2rem
+    }
+
+    kbd kbd {
+        padding: 0;
+        font-size: 1em;
+        font-weight: 700
+    }
+
+    figure {
+        margin: 0 0 1rem
+    }
+
+    img,
+    svg {
+        vertical-align: middle
+    }
+
+    table {
+        caption-side: bottom;
+        border-collapse: collapse
+    }
+
+    caption {
+        padding-top: .5rem;
+        padding-bottom: .5rem;
+        color: #6c757d;
+        text-align: left
+    }
+
+    th {
+        text-align: inherit;
+        text-align: -webkit-match-parent
+    }
+
+    tbody,
+    td,
+    tfoot,
+    th,
+    thead,
+    tr {
+        border-color: inherit;
+        border-style: solid;
+        border-width: 0
+    }
+
+    label {
+        display: inline-block
+    }
+
+    button {
+        border-radius: 0
+    }
+
+    button:focus:not(:focus-visible) {
+        outline: 0
+    }
+
+    button,
+    input,
+    optgroup,
+    select,
+    textarea {
+        margin: 0;
+        font-family: inherit;
+        font-size: inherit;
+        line-height: inherit
+    }
+
+    button,
+    select {
+        text-transform: none
+    }
+
+    [role=button] {
+        cursor: pointer
+    }
+
+    select {
+        word-wrap: normal
+    }
+
+    select:disabled {
+        opacity: 1
+    }
+
+    [list]::-webkit-calendar-picker-indicator {
+        display: none
+    }
+
+    [type=button],
+    [type=reset],
+    [type=submit],
+    button {
+        -webkit-appearance: button
+    }
+
+    [type=button]:not(:disabled),
+    [type=reset]:not(:disabled),
+    [type=submit]:not(:disabled),
+    button:not(:disabled) {
+        cursor: pointer
+    }
+
+    ::-moz-focus-inner {
+        padding: 0;
+        border-style: none
+    }
+
+    textarea {
+        resize: vertical
+    }
+
+    fieldset {
+        min-width: 0;
+        padding: 0;
+        margin: 0;
+        border: 0
+    }
+
+    legend {
+        float: left;
+        width: 100%;
+        padding: 0;
+        margin-bottom: .5rem;
+        font-size: calc(1.275rem + .3vw);
+        line-height: inherit
+    }
+
+    @media (min-width:1200px) {
+        legend {
+            font-size: 1.5rem
+        }
+    }
+
+    legend+* {
+        clear: left
+    }
+
+    ::-webkit-datetime-edit-day-field,
+    ::-webkit-datetime-edit-fields-wrapper,
+    ::-webkit-datetime-edit-hour-field,
+    ::-webkit-datetime-edit-minute,
+    ::-webkit-datetime-edit-month-field,
+    ::-webkit-datetime-edit-text,
+    ::-webkit-datetime-edit-year-field {
+        padding: 0
+    }
+
+    ::-webkit-inner-spin-button {
+        height: auto
+    }
+
+    [type=search] {
+        outline-offset: -2px;
+        -webkit-appearance: textfield
+    }
+
+    ::-webkit-search-decoration {
+        -webkit-appearance: none
+    }
+
+    ::-webkit-color-swatch-wrapper {
+        padding: 0
+    }
+
+    ::-webkit-file-upload-button {
+        font: inherit
+    }
+
+    ::file-selector-button {
+        font: inherit
+    }
+
+    ::-webkit-file-upload-button {
+        font: inherit;
+        -webkit-appearance: button
+    }
+
+    output {
+        display: inline-block
+    }
+
+    iframe {
+        border: 0
+    }
+
+    summary {
+        display: list-item;
+        cursor: pointer
+    }
+
+    progress {
+        vertical-align: baseline
+    }
+
+    [hidden] {
+        display: none !important
+    }
+
+    .wrapper-subscription-offers {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* MediaQueries */
+    @media (max-width: 576px) {
+        .info .badge {
+            left: 150px;
+            top: 426px;
+        }
+
+        .info {
+            border-bottom: none;
+        }
+
+        .wrapper-subscription-offers {
+            flex-direction: column;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+    }
+
+    @media (max-width: 768px) {
+        .info .badge {
+            left: 180px;
+            top: 426px;
+        }
+
+        .offers {
+            margin-top: 24px;
+        }
+    }
+
+    @media (max-width: 992px) {}
+
+    @media (max-width: 1200px) {}
+
+    @media (max-width: 1400px) {}
+
+    @keyframes rotating {
+        from{
+            transform: rotate(0deg);
+        }
+        to{
+            transform: rotate(360deg);
+        }
+    }
+
+</style>
+
+<body>
+
+    <div class="container">
+        <div class="wrapper d-flex justify-content-center align-items-center" style="max-width: 700px; margin: 0 auto;">
+            <div class="row">
+                <div id="register-success" class="register-success visually-hidden">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <div class="row py-5">
+                            <section class="d-flex justify-content-lg-start align-items-center flex-column text-center">
+                                <img src="https://www.estadao.com.br/paywall-zephr/assets/image/Confirma_Cadastro_ICO.png"
+                                    alt="Ícone de confirmação do cadastro" class="m-2">
+                                <p class="my-3 w-75">Seu cadastro foi concluído com sucesso! Você já pode aproveitar
+                                    suas 3 matérias grátis.</p>
+                                <small class="message">O conteúdo estará liberado em 3 segundos.</small>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+
+                <section
+                    class="info col-md-5 col-12 d-flex justify-content-lg-start align-items-center flex-column position-relative" id="forms">
+                    <div class="screen_loading visually-hidden">
+                        <div class="icon__loading">
+                            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 400 400" style="enable-background:new 0 0 367.136 367.136;  width: 40px; height: 40px;" xml:space="preserve">
+                            <path style="fill:#2488FF;" d="M290.845,295.334l5.816,5.844l-90.96,90.96h181.48l-68.109-68.439
+                        c15.535-14.474,28.635-31.564,38.452-50.335c13.856-26.498,21.181-56.405,21.181-86.489C378.705,83.832,294.874,0,191.831,0
+                        S4.957,83.832,4.957,186.874c0,35.732,10.123,70.47,29.274,100.459c18.629,29.172,44.9,52.578,75.971,67.687l17.492-35.973
+                        C76.66,294.23,44.957,243.585,44.957,186.874C44.957,105.887,110.844,40,191.831,40s146.874,65.887,146.874,146.874
+                        C338.705,228.236,321.068,267.667,290.845,295.334z" />
+                            <polygon style="fill:#005ECE;" points="296.661,301.178 290.845,295.334 205.701,209.778 205.701,392.138 	" />
+                            </svg>
+                        </div>
+                        <div class="icon__loading" style="font-size: 20px; font-weight: bold; color: #2488FF;">
+                            Aguarde
+                        </div>
+                    </div>
+                    <div class="login">
+                        <span class="position-absolute badge rounded-circle bg-warning d-none d-lg-block d-xl-block">
+                            <b class="d-flex justify-content-center">Ou</b>
+                        </span>
+
+                        <div class="d-flex justify-content-center align-items-start">
+                            <p class="py-4 text-center">
+                                Quer continuar lendo? <br />Cadastre-se e <b>GANHE 3 matérias grátis</b>, ou faça seu login.
+                            </p>
+                        </div>
+
+                        <form id="form-login" class="form text-center" style="margin: 0 15px;" novalidate>
+                            <a class="btn buttom__back w-100 mb-2 text-uppercase fw-bold text-end no-verify d-none" style="font-size: 0.7rem;"> <i class="fa fa-angle-left" aria-hidden="true"></i> Voltar</a>
+                            <div class="visually-hidden message_error form-floating mb-3"></div>
+
+                            <div class="form-floating mb-3">
+                                <input id="regwall_input_email" type="email" name="email_login" class="form-control buttom__form"
+                                    placeholder="E-mail" required>
+                                <small class="error__message"></small>
+                            </div>
+
+                            <div class="form-floating mb-3 no-verify d-none">
+                                <input name="password" type="password" class="form-control buttom__form no-verify"
+                                    id="floatingPasswordLogin" placeholder="Senha" required>
+                                <small class="error__message"></small>
+                                <div class="icon-password-login icon-password">
+                                    <img src="https://www.estadao.com.br/paywall-zephr/assets/image/visibility_on_24px.png"
+                                        alt="Ícone de visibilidade da senha ativa" class="flag-eyes">
+                                </div>
+                            </div>
+
+                            <div class="mb-3 no-verify d-none">
+                                <div class="d-flex justify-content-between">
+                                    <div class="keepin-conected">
+                                        <div class="form-check d-flex align-items-center">
+                                            <input class="form-check-input no-verify" type="checkbox" value=""
+                                                 required>
+                                            <label class="form-check-label mx-1" for="flexCheckDefault">
+                                                Manter conectado
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="forget-password">
+                                        <div id="forget-password" class="text-decoration-none" style="cursor: pointer; color:#0d6efd;">
+                                            Esqueceu sua senha?</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" id="btn__form-login"
+                                class="btn buttom__active w-100 mb-2 text-uppercase fw-bold">Continuar</button>
+                            <small class="mb-3">Ao continuar, você concorda com os <a href="https://www.estadao.com.br/termo-de-uso" target="_blank">Termos de Uso</a> </small>
+                        </form>
+                    </div>
+
+                    <div id="register" class="register visually-hidden">
+                        <span class="position-absolute badge rounded-circle bg-warning d-none d-lg-block d-xl-block">
+                            <b class="d-flex justify-content-center">Ou</b>
+                        </span>
+
+                        <div class="d-flex justify-content-center align-items-start flex-column">
+                            <p class="pt-4 text-center fs-5 w-100">Faça seu cadastro para continuar</p>
+                            <a class="btn buttom__back w-100 mb-2 text-uppercase fw-bold text-end" style="font-size: 0.7rem;"> <i class="fa fa-angle-left" aria-hidden="true"></i> Voltar</a>
+                        </div>
+
+                        <form id="form-register" action="" class="form text-center" style="margin: 0 15px;" novalidate>
+                            <div class="form-floating mb-3">
+                                <input name="email_login" type="email" class="form-control buttom__form"
+                                    placeholder="E-mail" required>
+                                <small class="error__message"></small>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input name="nome" type="text" class="form-control buttom__form"
+                                    placeholder="Nome" required>
+                                <small class="error__message"></small>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input name="sobrenome" type="text" class="form-control buttom__form"
+                                    placeholder="Sobrenome" required>
+                                <small class="error__message"></small>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input name="telefone" id="telefone" type="text" class="form-control buttom__form"
+                                    placeholder="Telefone" required>
+                                <small class="error__message"></small>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input name="password" type="password" class="form-control buttom__form"
+                                    id="floatingPasswordRegister" placeholder="Senha" required>
+                                <small class="error__message"></small>
+                                <div class="icon-password-register icon-password">
+                                    <img src="https://www.estadao.com.br/paywall-zephr/assets/image/visibility_on_24px.png"
+                                        alt="Ícone de visualização ativa na senha" class="flag-eyes">
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between">
+                                    <div class="keepin-conected">
+                                        <div class="form-check d-flex align-items-center">
+                                            <input id="aceite_newsletter" name="aceite_newsletter" class="form-check-input" type="checkbox" value="S"  required>
+                                            <label class="form-check-label mx-1" for="flexCheckDefault" style="font-size: 11px;">
+                                                Quero conhecer as Newsletters do Estadão.
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" id="cadastro_regwall"
+                                class="btn buttom__active w-100 mb-2 text-uppercase fw-bold">Cadastrar</button>
+                            <small class="mb-3">Ao se cadastrar, você concorda com os <a href="https://www.estadao.com.br/termo-de-uso" target="_blank">Termos de Uso</a>. </small>
+                        </form>
+                    </div>
+
+                    <div class="change-password visually-hidden">
+                        <span class="position-absolute badge rounded-circle bg-warning d-none d-lg-block d-xl-block">
+                            <b class="d-flex justify-content-center">Ou</b>
+                        </span>
+
+                        <div class="d-flex justify-content-center align-items-center flex-column">
+                            <p class="mt-2 w-75 text-center fs-4">Alterar Senha</p>
+                            <p class="py-4 w-75 text-center fs-5">Preencha o campo abaixo com o seu e-mail e receba o
+                                link para redefinição de senha.</p>
+                        </div>
+
+                        <form id="form-change-password" class="text-center" style="margin: 0 15px;">
+                            <div class="form-floating mb-3">
+                                <input name="email" type="email" class="form-control buttom__form"
+                                    placeholder="E-mail">
+                                <small class="error__message"></small>
+                            </div>
+
+                            <button type="submit"
+                                class="btn buttom__active w-100 mb-2 text-uppercase fw-bold">Enviar</button>
+                            <a class="btn buttom__back w-100 mb-2 text-uppercase fw-bold">Voltar</a>
+                        </form>
+                    </div>
+
+                    <div id="change-password-success" class="change-password-success visually-hidden">
+                        <span class="position-absolute badge rounded-circle bg-warning d-none d-lg-block d-xl-block">
+                            <b class="d-flex justify-content-center">Ou</b>
+                        </span>
+
+                        <div class="d-flex justify-content-center align-items-center flex-column">
+                            <p class="mt-2 w-75 text-center fs-4">Alterar Senha</p>
+                            <img src="https://www.estadao.com.br/paywall-zephr/assets/image/Troca_Senha_ICO.png"
+                                alt="Ícone de troca de senha bem sucedida" class="m-2">
+                            <p class="my-3 w-75  text-center">Caso este seja seu e-mail cadastrado, você receberá por
+                                ele um link para redefinição de senha.</p>
+                            <small class="message">Você será redirecionado para a tela de login em 5 segundos.</small>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="offers" class="offers col-md-7 col-12 pb-5">
+                    <div
+                        class="row d-block d-sm-none position-absolute d-flex justify-content-center align-items-center w-100">
+                        <span
+                            class="position-absolute badge-responsive rounded-circle bg-warning d-flex justify-content-center align-items-center">
+                            Ou
+                        </span>
+                    </div>
+
+                    <div class="d-flex justify-content-center align-items-center">
+                        <p class="py-4 w-75 text-center text-white">Assine já e tenha acesso ilimitado ao Portal
+                            Estadão, APP Estadão e outros produtos.</p>
+                    </div>
+
+                    <div class="d-flex justify-content-center">
+                        <img src="https://www.estadao.com.br/paywall-zephr/assets/image/devices_desktop@2x.png"
+                            alt="Imagem de desktops, Smartphones, Tables e Notebook" class="desktops">
+                    </div>
+
+                    <div class="my-5 wrapper-subscription-offers">
+                        
+                        <a href="{{link-offer-card1-tab1}}?canal=PAY&referrer_url={{blaize.customData.referrer_url}}&paywall_dinamico={{link-identificador}}{{variante_teste-ab}}" id="{{event-ga-card1}}" class="" target="_blank" aria-label="Card de assine agora">
+                            <div class="subscription-offers pt-3 mt-2 position-relative">  
+                                <div class="badget-percent d-flex justify-content-center align-items-center flex-column">
+                                    <span class="discount-card-p text-decoration-none text-uppercase fw-bold">{{discount-card1-tab1}}</span>
+                                    <span class="discount-card-p text-uppercase fw-bold">{{text-discount-card1}}</span>
+                                </div>
+
+                                <div class="d-flex justify-content-between flex-column">
+                                    <div class="offers-info position-relative mb-5 px-3">
+                                        <div class="title">
+                                            <span class="fw-bold text-uppercase">
+                                                {{title-card1-tab1}}
+                                            </span>
+                                        </div>
+                                        <div class="price d-flex justify-content-center align-items-center w-100">
+                                            <span class="fw-bold text-uppercase">
+                                                R$<span class="fs-3">{{price-card1-tab1}}{{price-cents-card1-tab1}}</span>/{{price-period-card1-tab1}}
+                                            </span>
+                                        </div>
+                                        <small class="observation fw-bold text-uppercase">{{subperiod-card1-tab1}}</small>
+                                    </div>
+                                    <div class="gifts-subscription">
+                                        <span class="fw-bold text-uppercase">
+                                            Assine Agora
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a href="{{link-offer-card2-tab1}}?canal=PAY&referrer_url={{blaize.customData.referrer_url}}&paywall_dinamico={{link-identificador}}{{variante_teste-ab}}" id="{{event-ga-card1}}" class="" target="_blank" aria-label="Card de assine agora">
+                            <div class="subscription-offers pt-3 mt-2 px-4 position-relative">
+                                <div class="badget-percent d-flex justify-content-center align-items-center flex-column">
+                                    <span class="discount-card-p text-uppercase fw-bold">{{discount-card2-tab1}}</span>
+                                    <span class="discount-card-p text-uppercase fw-bold">{{text-discount-card2}}</span>
+                                </div>
+                                <div class="d-flex justify-content-between flex-column">
+                                    <div class="offers-info position-relative mb-5">
+                                        <div class="title">
+                                            <span class="fw-bold text-uppercase">
+                                                {{title-card2-tab1}}
+                                            </span>
+                                        </div>
+                                        <div class="price d-flex justify-content-center align-items-center w-100">
+                                            <span class="fw-bold text-uppercase">
+                                                R$<span class="fs-3">{{price-card2-tab1}}{{price-cents-card2-tab1}}</span>/{{price-period-card2-tab1}}
+                                            </span>
+                                        </div>
+                                        <small class="observation fw-bold text-uppercase">{{subperiod-card2-tab1}}</small>
+                                    </div>
+                                    <div class="gifts-subscription-image">
+                                        <img src="{{img-link-card2-tab1}}" alt="Imagem de promoções e brindes" width="180">
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+
+
+
+                    </div>
+
+                    <div class="d-flex justify-content-center">
+                        <a target="_blank" href="{{link-offer-button}}?referrer_url={{blaize.customData.referrer_url}}&paywall_dinamico={{link-identificador}}" id="{{event-ga-button}}" class="btn btn-outline-light w-75 fw-bolder"
+                            aria-label="{{text-button}}">{{text-button}}</a>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        let inputsEmails = document.querySelector("#regwall_input_email")
+
+        inputsEmails.addEventListener("click", ()=>{
+            if (window.dataLayerEstadao) {
+                window.dataLayerEstadao.push({
+                    event: "genericEvent",
+                    genericCategory: "Regwall",
+                    genericAction: "click",
+                    genericLabel: "regwall_input_email",
+                });
+            }
+        });
+
+        if (window.dataLayerEstadao) {
+            window.dataLayerEstadao.push({
+                event: "genericEvent",
+                genericCategory: "Regwall",
+                genericAction: "show",
+                genericLabel: "regwall_visualizado",
+            });
+        }
+
+        function changeScreen(screenIn, screenOut) {
+            screenOut.classList.add("visually-hidden")
+            screenIn.classList.remove("visually-hidden")
+        }
+
+        const changePasswordSuccess = document.querySelector("#change-password-success");
+        const registerSuccess = document.querySelector("#register-success");
+        const registerScreen = document.querySelector("#register");
+        const offers = document.querySelector("#offers");
+
+        const btnFormLogin = document.querySelector("#btn__form-login");
+        const noVerify = document.querySelectorAll(".no-verify:not(input[name])");
+        const formLogin = document.querySelector("#form-login");
+
+        const toggleDisableClass = (element)=>{
+            element.classList.toggle("buttom__active");
+            element.classList.toggle("buttom__disable");
+        }
+
+        const toggleDisableProp = (element) =>{
+            if (element.disabled == true) {
+                element.disabled = false
+            } else {
+                element.disabled = true
+            }
+        }
+
+        var formRegister = null;
+        const consumeApi = async (body, endPoint, method="POST", mode="") => {
+            var dataForm = new FormData();
+            var response = "";
+            dataForm.append("json", JSON.stringify(body));
+
+            let headers = {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+
+            if (mode == "no-cors") {
+                headers["mode"] = "no-cors"
+            }
+            document.querySelector(".screen_loading").classList.remove("visually-hidden");
+            try {
+                var responseApi = await fetch(endPoint, {
+                    method: method,
+                    headers: headers,
+                    body: JSON.stringify(body)
+                });
+
+                response = responseApi.json()
+            } catch (_e) {
+                response = _e
+            }
+            document.querySelector(".screen_loading:not(.visually-hidden)").classList.add("visually-hidden");
+            return response;
+        }
+
+        var dataForApiLogin = (data) => {
+            return {
+                "email": data.email_login,
+                "password": data.password
+            }
+        }
+
+        const valida = {
+            telefone(value) {
+                var re = /\([1-9]{2}\) (?:[2-8]|9[1-9])[0-9]{3}\-[0-9]{4}$/g;
+                return re.test(value);
+            },
+            email(value) {
+                var re =  /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+                return re.test(value);
+            },
+            defaultInput(value) {
+                if (value != "" || value != undefined)
+                    return true
+                return false
+            },
+            checkbox(checkbox) {
+                if (checkbox.checked) {
+                    return true
+                }
+                return false
+            }
+        }
+
+        const masks = {
+            telefone(value) {
+                return value
+                    .replace(/\D+/g, '')
+                    .replace(/(\d{2})(\d)/, '($1) $2')
+                    .replace(/(\d{4})(\d)/, '$1-$2')
+                    .replace(/(\d{4})-(\d)(\d{4})/, '$1$2-$3')
+                    .replace(/(-\d{4})\d+?$/, '$1')
+            }
+        }
+
+        document.querySelector(".change-password").addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            if (window.dataLayerEstadao) {
+                window.dataLayerEstadao.push({
+                    event: "genericEvent",
+                    genericCategory: "Regwall",
+                    genericAction: "click",
+                    genericLabel: "regwall_clique_esqueci_senha",
+                });
+            }
+
+            var inputs = document.querySelectorAll("#form-change-password input[name]");
+
+            let bodyApi = {};
+            var formValid = true
+            for (var i in inputs) {
+                if (inputs.hasOwnProperty(i) && inputs[i].value === "") {
+                    formValid = false;
+                    inputs[i].classList.add("buttom__form__error");
+                    inputs[i].nextElementSibling.innerHTML = `O Campo ${inputs[i].getAttribute("placeholder")} é Obrigatório`;
+                } else {
+                    if (inputs.hasOwnProperty(i) && inputs[i].getAttribute('name') === "email") {
+                        if (!valida.defaultInput(inputs[i].value) && !valida.email(inputs[i].value)) {
+                            inputs[i].classList.add("buttom__form__error");
+                            inputs[i].nextElementSibling.innerHTML = `O Campo ${inputs[i].getAttribute("placeholder")} é Obrigatório`;
+                            formValid = false;
+                        } else {
+                            inputs[i].classList.remove("buttom__form__error");
+                            inputs[i].nextElementSibling.innerHTML = "";
+                        }
+                    }
+
+                    if (inputs.hasOwnProperty(i) && formValid) {
+                        bodyApi[inputs[i].getAttribute('name')] = inputs[i].value;
+                    }
+                }
+            }
+
+            if (formValid) {
+                var resetPasswordByApi = await consumeApi(bodyApi, "https://api.estadao.com.br/users/login/password");
+                if (resetPasswordByApi.status && resetPasswordByApi.code == 202) {
+                    changeScreen(changePasswordSuccess, document.querySelector(".change-password"));
+
+                    setTimeout(()=>{
+                        changeScreen(document.querySelector(".login"), changePasswordSuccess);
+                    },5000)
+                    return
+                }
+
+                if (!resetPasswordByApi.status && resetPasswordByApi.code == 400) {
+                    document.querySelector("#form-change-password .error__message").innerHTML = "Não foi possível concluir a solicitação."
+                    return
+                }
+            }
+        });
+
+        const formRegisterFc = (element, defaultInputEmail) => {
+            document.querySelectorAll('input[name="email_login"]').forEach( e => e.value = defaultInputEmail);
+
+            var inputs = document.querySelectorAll("#form-register input[name]");
+            inputs.forEach(input => {
+            const field = input.id;
+            input.addEventListener("input", e => {
+                try {
+                    e.target.value = masks[field](e.target.value);
+                } catch (_e) {
+                    console.log(`${field} - Campo sem Máscara`);
+                }
+
+                }, false)
+            });
+
+            element.addEventListener("submit", async (e) => {
+                e.preventDefault();
+
+                if (window.dataLayerEstadao) {
+                    window.dataLayerEstadao.push({
+                        event: "genericEvent",
+                        genericCategory: "Regwall",
+                        genericAction: "click",
+                        genericLabel: "regwall_clique-cadastrar",
+                    });
+                }
+
+                let bodyApi = {};
+                var formValid = true
+                for (var i in inputs) {
+
+                    if (inputs.hasOwnProperty(i) && inputs[i].value === "") {
+                        inputs[i].classList.add("buttom__form__error");
+                        inputs[i].nextElementSibling.innerHTML = `O Campo ${inputs[i].getAttribute("placeholder")} é Obrigatório`;
+                        formValid = false;
+                    } else {
+                        if (inputs.hasOwnProperty(i) && inputs[i].getAttribute('name') === "email_login") {
+                            if (!valida.defaultInput(inputs[i].value) || !valida.email(inputs[i].value)) {
+                                inputs[i].classList.add("buttom__form__error");
+                                if (window.dataLayerEstadao) {
+                                    window.dataLayerEstadao.push({
+                                        event: "genericEvent",
+                                        genericCategory: "Regwall",
+                                        genericAction: "show",
+                                        genericLabel: "regwall_cadastro_email",
+                                    });
+                                }
+                                inputs[i].nextElementSibling.innerHTML = `Preencha o campo ${inputs[i].getAttribute("placeholder")} com um e-mail válido`;
+                                formValid = false;
+                            } else {
+                                inputs[i].classList.remove("buttom__form__error");
+                                inputs[i].nextElementSibling.innerHTML = "";
+                            }
+
+                        }
+
+                        if (inputs.hasOwnProperty(i) && inputs[i].getAttribute('name') === "nome") {
+                            if (!valida.defaultInput(inputs[i].value)) {
+                                inputs[i].classList.add("buttom__form__error");
+                                if (window.dataLayerEstadao) {
+                                    window.dataLayerEstadao.push({
+                                        event: "genericEvent",
+                                        genericCategory: "Regwall",
+                                        genericAction: "show",
+                                        genericLabel: "regwall_cadastro_nome",
+                                    });
+                                }
+                                formValid = false;
+                            } else {
+                                inputs[i].classList.remove("buttom__form__error");
+                                inputs[i].nextElementSibling.innerHTML = "";
+                            }
+                        }
+
+                        if (inputs.hasOwnProperty(i) && inputs[i].getAttribute('name') === "sobrenome") {
+                            if (!valida.defaultInput(inputs[i].value)) {
+                                inputs[i].classList.add("buttom__form__error");
+                                if (window.dataLayerEstadao) {
+                                    window.dataLayerEstadao.push({
+                                        event: "genericEvent",
+                                        genericCategory: "Regwall",
+                                        genericAction: "show",
+                                        genericLabel: "regwall_cadastro_sobrenome",
+                                    });
+                                }
+                                formValid = false;
+                            } else {
+                                inputs[i].classList.remove("buttom__form__error");
+                                inputs[i].nextElementSibling.innerHTML = "";
+                            }
+                        }
+
+                        if (inputs.hasOwnProperty(i) && inputs[i].getAttribute('name') === "telefone") {
+                            if (!valida.defaultInput(inputs[i].value) || !valida.telefone(inputs[i].value)) {
+                                inputs[i].classList.add("buttom__form__error");
+                                if (window.dataLayerEstadao) {
+                                    window.dataLayerEstadao.push({
+                                        event: "genericEvent",
+                                        genericCategory: "Regwall",
+                                        genericAction: "show",
+                                        genericLabel: "regwall_cadastro_telefone",
+                                    });
+                                }
+                                inputs[i].nextElementSibling.innerHTML = `Preencha o campo ${inputs[i].getAttribute("placeholder")} com um telefone válido`;
+                                formValid = false;
+                            } else {
+                                inputs[i].classList.remove("buttom__form__error");
+                                inputs[i].nextElementSibling.innerHTML = "";
+                            }
+                        }
+
+                        if (inputs.hasOwnProperty(i) && inputs[i].getAttribute('name') === "password") {
+                            if (!valida.defaultInput(inputs[i].value)) {
+                                inputs[i].classList.add("buttom__form__error");
+                                formValid = false;
+                            } else {
+                                inputs[i].classList.remove("buttom__form__error");
+                                inputs[i].nextElementSibling.innerHTML = "";
+                            }
+                        }
+
+                        if (inputs.hasOwnProperty(i) && inputs[i].getAttribute('name') === "aceite_newsletter") {
+                            if (!valida.checkbox(inputs[i])) {
+                                inputs[i].value = "N"
+                            }
+                        }
+
+                        if (inputs.hasOwnProperty(i) && formValid) {
+                            bodyApi[inputs[i].getAttribute('name')] = inputs[i].value;
+                            bodyApi["origem"] = "signwall-zephr";
+                        }
+                    }
+
+                }
+
+                if (formValid) {
+                    var registerByApi = await consumeApi(bodyApi, "https://api.estadao.com.br/users/register");
+                    if (!registerByApi.error) {
+                        var send_data_login = dataForApiLogin(bodyApi)
+
+                        var send_data_form_login = await consumeApi(send_data_login, "https://api.estadao.com.br/users/login?with_cookie=true");
+                        var cookies = send_data_form_login.cookies;
+
+                        // cria cookies login
+                        for (let i = 0; i < cookies.length; i++) {
+                            var cookie = cookies[i];
+                            setCookie(cookie.name, cookie.value, cookie.expire)
+                        }
+
+                        var bodyEmail = "<!DOCTYPE html><html><head><meta http-equiv='Content-Type' content='text/html; charset=UTF-8'> <meta name='viewport' content='width=device-width'> <title>Estadão - Email</title> <style>/* ------------------------------------- GLOBAL RESETS ------------------------------------- */ /*All the styling goes here*/ img{border: none; -ms-interpolation-mode: bicubic; max-width: 100%;}body{background-color: #f6f6f6; font-family: Arial, Helvetica, sans-serif; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.4; margin: 0; padding: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;}table{border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;}table td{font-family: Arial, Helvetica, sans-serif; font-size: 14px; vertical-align: top;}/* ------------------------------------- BODY & CONTAINER ------------------------------------- */ .body{background-color: #f6f6f6; width: 100%;}/* Set a max-width, and make it display as block so it will automatically stretch to that width, but will also shrink down on a phone or something */ .container{display: block; margin: 0 auto !important; /* makes it centered */ max-width: 580px; padding: 10px; width: 580px;}/* This should also be a block element, so that it will fill 100% of the .container */ .content{box-sizing: border-box; display: block; margin: 0 auto; max-width: 580px; padding: 10px;}/* ------------------------------------- HEADER, FOOTER, MAIN ------------------------------------- */ .main{background: #EBECF0; width: 100%;}.header{padding: 0; box-sizing: border-box; background: #2575e8;}.cabecalho{padding: 0; box-sizing: border-box; background: #fff;}.blue-section{background: #2575e8; width: 100%;}.gray-section{background: #d3d3d3; width: 100%;}.footer{background: #f5f5f5; padding: 20px 24px; text-align: center; width: 100%; box-sizing: border-box;}.footer2{background: #f5f5f5; padding: 5px 5px; text-align: center; width: 100%; box-sizing: border-box;}.main-section{background-color: white; padding: 40px 64px; text-align: center; width: 100%; box-sizing: border-box;}/* custom for media */ .app-media-section{background: #eaecf1; width: 100%; text-align: center;}.app-media-section a{text-decoration: none;}.app-media-title, .app-media-title p{padding: 0; margin: 0; text-align: center; font-weight: 600; font-size: 16px; line-height: 24px; color: #2575e8;}.pb-s{padding-bottom: 8px;}.pt-s{padding-top: 8px;}.p-m{padding: 16px !important;}.p-l{padding: 24px !important;}.pr-s{padding-right: 8px;}.ph-m{padding-right: 16px; padding-left: 16px;}.mr-s{margin-right: 8px;}.mr-m{margin-right: 16px;}.mh-s{margin-right: 8px; margin-left: 8px;}.mh-xs{margin-right: 4px; margin-left: 4px;}.mv-l{margin-top: 24px; margin-bottom: 24px;}.mh-xl{margin-right: 48px; margin-left: 48px;}.mh-xxl{margin-right: 96px; margin-left: 96px;}.mt-m{margin-top: 16px;}.mt-l{margin-top: 24px !important;}.mt-xl{margin-top: 48px !important;}.mr-l{margin-right: 24px;}.mt-s{margin-top: 8px;}.mt-m{margin-top: 16px !important;}.mt-l{margin-top: 24px;}.mb-xs{margin-bottom: 4px;}.mb-s{margin-bottom: 8px;}.mb-m{margin-bottom: 16px !important;}.mb-l{margin-bottom: 24px;}.mb-xl{margin-bottom: 48px;}.pb-m{padding-bottom: 16px;}.pt-m{padding-top: 16px;}.logo{display: block; margin: 24px auto;}.wrapper{padding: 0; box-sizing: border-box;}.box{padding: 0 16px;}.button-wrapper{padding: 28px 64px 20px;}/* ------------------------------------- TYPOGRAPHY ------------------------------------- */ h1, h2, h3, h4, p, ul, ol{font-family: Arial, Helvetica, sans-serif; margin: 0;}p li, ul li, ol li{list-style-position: inside; margin-left: 5px;}a{text-decoration: none;}.text-xl-royal-blue-bold-31{font-size: 26px; font-weight: bold; line-height: 1.19; color: #2575e8;}.text-lg-midnight-blue-bold-26{font-size: 20px; font-weight: bold; line-height: 1.3; color: #002a67;}.text-lg-royal-blue-bold-22{font-size: 20px; font-weight: bold; line-height: 1.1; color: #2575e8;}.text-lg-royal-white-bold-22{font-size: 20px; font-weight: bold; line-height: 1.1; color: white;}.text-lg-midnight-blue-bold-22{font-size: 20px; font-weight: bold; line-height: 1.1; color: #002a67;}.text-lg-dark-indigo-bold-22{font-size: 20px; font-weight: bold; line-height: 1.1; color: #07103e;}.text-lg-dark-indigo-regular-22{font-size: 20px; font-weight: normal; line-height: 1.1; color: #07103e;}.text-base-midnight-blue-bold-22{font-size: 18px; font-weight: bold; line-height: 1.22; color: #002a67;}.text-base-royal-blue-bold-21{font-size: 18px; font-weight: bold; line-height: 1.17; color: #2575e8;}.text-sm-dark-gray-bold-20{font-size: 16px; font-weight: bold; line-height: 1.25; color: #232323;}.text-sm-dark-gray-regular-20{font-size: 16px; font-weight: normal; line-height: 1.25; color: #232323;}.text-sm-royal-blue-bold-20{font-size: 16px; font-weight: bold; line-height: 1.25; color: #2575e8;}.text-sm-royal-blue-bold-18{font-size: 16px; font-weight: bold; line-height: 1.13; color: #2575e8;}.text-sm-midnight-blue-bold-18{font-size: 16px; font-weight: bold; line-height: 1.13; color: #002a67;}.text-sm-dove-gray-bold-18{font-size: 16px; font-weight: bold; line-height: 1.13; color: #707070;}.text-sm-dark-indigo-bold-18{font-size: 16px; font-weight: bold; line-height: 1.13; color: #07103e;}.text-sm-dark-indigo-regular-18{font-size: 14px; font-weight: 500; line-height: 1.50; color: #002a67;}.text-sm-black-bold-20{font-size: 16px; font-weight: bold; line-height: 1.25; color: #002a67;}.text-sm-black-regular-20{font-size: 16px; font-weight: normal; line-height: 1.25; color: #002a67;}.text-sm-white-regular-20{font-size: 16px; font-weight: normal; line-height: 1.25; color: white;}.text-sm-dark-gray-bold-18{font-size: 16px; font-weight: bold; line-height: 1.13; color: #232323;}.text-sm-dark-gray-regular-18{font-size: 16px; font-weight: normal; line-height: 1.13; color: #232323;}.text-xs-midnight-blue-regular-12{font-size: 10px; font-weight: normal; line-height: 1.2; color: #002a67;}.text-xs-midnight-blue-regular-14{font-size: 10px; font-weight: normal; line-height: 1.4; color: #002a67;}.underline{text-decoration: underline;}/*------------------ Background */ .bg__ice-blue{background: #f3f8ff;}.bg__royal-blue{background: #2575e8;}.bg__peacock-blue{background: #0052a7;}.rounded--big{border-radius: 20px;}.width-full{width: 100%;}/* ------------------------------------- BUTTONS ------------------------------------- */ .button{background: #2575e8; text-align: center; display: block; border-radius: 12px; white-space: nowrap; margin: auto; padding: 18px 0; color: white!important; font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-size: 16px; line-height: 1.13; text-decoration: none;}.button--white{background: white; text-align: center; display: block; border-radius: 12px; white-space: nowrap; margin: auto; padding: 18px 0; color: #2575e8; font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-size: 16px; line-height: 1.13; text-decoration: none;}/* ------------------------------------- OTHER STYLES THAT MIGHT BE USEFUL ------------------------------------- */ .last{margin-bottom: 0;}.first{margin-top: 0;}.align-center{text-align: center;}.align-right{text-align: right;}.align-left{text-align: left;}.clear{clear: both;}.mt0{margin-top: 0;}.mb0{margin-bottom: 0;}hr{border: 0; height: 1px; background-color: #d8d8d8; margin: 20px 0;}.hide-option{display: none !important;}.inline-middle{display: inline-block; vertical-align: middle;}.block{display: block;}/* ------------------------------------- RESPONSIVE AND MOBILE FRIENDLY STYLES ------------------------------------- */ @media only screen and (max-width: 620px){table[class=body] .content{padding: 0 !important;}table[class=body] .container{padding: 0 !important; width: 100% !important;}table[class=body] .main{border-left-width: 0 !important; border-radius: 0 !important; border-right-width: 0 !important;}table[class=body] .button table{width: 100% !important;}table[class=body] .button a{width: 100% !important;}table[class=body] .img-responsive{height: auto !important; max-width: 100% !important; width: auto !important;}.multi-line{display: block;}.main-section{padding: 40px 36px;}.box{padding: 0;}.button-wrapper{padding: 28px 32px 20px;}}/* ------------------------------------- PRESERVE THESE STYLES IN THE HEAD ------------------------------------- */ @media all{.ExternalClass{width: 100%;}.ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div{line-height: 100%;}.apple-link a{color: inherit !important; font-family: inherit !important; font-size: inherit !important; font-weight: inherit !important; line-height: inherit !important; text-decoration: none !important;}#MessageViewBody a{color: inherit; text-decoration: none; font-size: inherit; font-family: inherit; font-weight: inherit; line-height: inherit;}}</style> <style>.white-section{background-color: white; padding: 40px 64px; text-align: center; width: 100%; box-sizing: border-box;}.ice-blue-section{background-color: #f3f8ff; padding: 40px 64px; text-align: center; width: 100%; box-sizing: border-box;}.portal_estadao_option{width: calc(100% / 3 - 32px); float: left; padding: 16px; height: 136px;}.portal_estadao_option_text{margin-top: 16px;}.app_estadao_option{width: calc(100% / 3 - 32px); float: left; padding: 10px 16px 0px 16px; height: 166px;}.app_estadao_option_text{margin-top: 16px;}.button-container{max-width: 210px; margin: 24px auto 0;}.image{display: block; margin: 0 auto;}@media only screen and (max-width: 620px){.white-section, .ice-blue-section{padding: 40px 16px;}.portal_estadao_option{width: calc(100% / 2 - 32px); padding: 12px 16px; height: 128px;}.portal_estadao_option_text{margin-top: 8px;}.app_estadao_option{width: calc(100% / 2 - 32px); padding: 12px 16px; height: 158px;}.app_estadao_option_text{margin-top: 8px;}}</style></head><body class=''> <table role='presentation' border='0' cellpadding='0' cellspacing='0' class='body'> <tbody> <tr> <td>&nbsp;</td><td class='container'> <div class='content'> <table role='presentation' class='main'> <tbody> <tr> <td class='header'> <a href='https://estadao.com.br?utm_source=estadao:email-mkt&utm_medium=email-mkt&utm_campaign=boas-vindas-regwall:c&utm_content=link:logo-superior-boas-vindas-regwall::&utm_term=::::' target='_blank'> <img class='logo' src='https://assine.estadao.com.br/mkt/emkt-regwall/grupo%203288.png' alt='Estadão'> </a></td></tr><tr> <td class=cabecalho> <img src='https://assine.estadao.com.br/mkt/emkt-regwall/grupo%20de%20m%C3%A1scara%209.png' alt='Topo' style='margin: auto; display: block'> </td></tr></tbody> </table> <div><div class='white-section'> <table> <tbody> <tr> <td> <p class='text-sm-black-bold-20' style='margin-bottom: 20px;' >Agora você tem acesso a 3 conteúdos mensais do portal Estadão</p><p class='text-sm-dark-indigo-regular-18' style='margin-bottom: 20px;' >A Bem-vindo(a)</p><p class='text-sm-dark-indigo-regular-18' style='margin-bottom: 20px;' >O portal Estadão traz uma infinidade de conteúdos, que inclui notícias em tempo real, matérias especiais, Colunas, Opinião, Acervo e muito mais.</p><p class='text-sm-dark-indigo-regular-18' style='margin-bottom: 20px;' >Para você conhecer um pouco do trabalho desenvolvido por um dos jornais de maior prestígio e credibilidade do País, liberamos seu acesso a 3 matérias mensais.</p><p class='text-sm-dark-indigo-regular-18' style='margin-bottom: 20px;' >Aproveite!</p><div class='button-container'> <a class='button' href='https://estadao.com.br?utm_source=estadao:email-mkt&utm_medium=email-mkt&utm_campaign=boas-vindas-regwall:c&utm_content=botao:ir-para-o-site::&utm_term=::::' target='_blank' style='margin-bottom: 40px;'>Ir para o site</a> </div></td></tr><tr> <td><p class='text-sm-black-bold-20' style='margin-bottom: 10px;' >Editorias em destaque:</p><div class='app_estadao_option'><a href='https://politica.estadao.com.br/?utm_source=estadao:email-mkt&utm_medium=email-mkt&utm_campaign=boas-vindas-regwall:c&utm_content=link:sub-home-política::&utm_term=::::' target='_blank'> <img class='' src='https://assine.estadao.com.br/mkt/emkt-regwall/politica_ico@2x.png' alt='App Estadão - Personalize' width='auto' height='70px' style='margin-bottom: 20px;'> <p class='text-sm-dark-indigo-regular-18'>Política</p></a> </div><div class=' app_estadao_option'><a href='https://economia.estadao.com.br/?utm_source=estadao:email-mkt&utm_medium=email-mkt&utm_campaign=boas-vindas-regwall:c&utm_content=link:sub-home-economia::&utm_term=::::' target='_blank'> <img class='' src='https://assine.estadao.com.br/mkt/emkt-regwall/economia_ico@2x.png' alt='App Estadão - Colunistas' width='auto' height='70px' style='margin-bottom: 20px;'> <p class='text-sm-dark-indigo-regular-18'>Economia</p></a> </div><div class='app_estadao_option'><a href='https://internacional.estadao.com.br/?utm_source=estadao:email-mkt&utm_medium=email-mkt&utm_campaign=boas-vindas-regwall:c&utm_content=link:sub-home-internacional::&utm_term=::::' target='_blank'> <img class='' src='https://assine.estadao.com.br/mkt/emkt-regwall/internacional_ico@2x.png' alt='App Estadão - Notificações' width='auto' height='70px' style='margin-bottom: 20px;'> <p class='text-sm-dark-indigo-regular-18'>Internacional</p></a> </div><div class='app_estadao_option'><a href='https://cultura.estadao.com.br/?utm_source=estadao:email-mkt&utm_medium=email-mkt&utm_campaign=boas-vindas-regwall:c&utm_content=link:sub-home-cultura::&utm_term=::::' target='_blank'> <img class='' src='https://assine.estadao.com.br/mkt/emkt-regwall/cultura_ico@2x.png' alt='App Estadão - Salvar' width='auto' height='70px' style='margin-bottom: 20px;'> <p class='text-sm-dark-indigo-regular-18'>Cultura</p></a> </div><div class='app_estadao_option'><a href='https://esportes.estadao.com.br/?utm_source=estadao:email-mkt&utm_medium=email-mkt&utm_campaign=boas-vindas-regwall:c&utm_content=link:sub-home-esporte::&utm_term=::::' target='_blank'> <img class='' src='https://assine.estadao.com.br/mkt/emkt-regwall/esporte_ico@2x.png' alt='App Estadão - Vídeos' width='auto' height='70px' style='margin-bottom: 20px;'> <p class='text-sm-dark-indigo-regular-18'>Esporte</p></a> </div><div class='app_estadao_option'><a href='https://saude.estadao.com.br/?utm_source=estadao:email-mkt&utm_medium=email-mkt&utm_campaign=boas-vindas-regwall:c&utm_content=link:sub-home-saude::&utm_term=::::' target='_blank'> <img class='' src='https://assine.estadao.com.br/mkt/emkt-regwall/saude_ico@2x.png' alt='App Estadão - Black Light' width='auto' height='70px' style='margin-bottom: 20px;'> <p class='text-sm-dark-indigo-regular-18'>Saúde</p></a> </div></td></tr></tbody> </table></div><div class='footer'> <table role='presentation' border='0' cellpadding='0' cellspacing='0'> <tbody> <tr> <td class='wrapper'> <p style='padding-top: 10px;'> <span class='multi-line'> <a class='mh-s' target='_blank' href='https://www.facebook.com/estadao/'> <img height='40px' width='40px' src='https://assine.estadao.com.br/mkt/emkt-regwall/icon_facebook.png' alt='' style='margin-bottom: 40px;'> </a> <a class='mh-s' target='_blank' href='https://www.instagram.com/estadao/'> <img height='40px' width='40px' src='https://assine.estadao.com.br/mkt/emkt-regwall/icon_instagram.png' alt='' style='margin-bottom: 40px;'> </a> <a class='mh-s' target='_blank' href='https://www.linkedin.com/company/estadao/'> <img height='40px' width='40px' src='https://assine.estadao.com.br/mkt/emkt-regwall/icon_linkedin.png' alt='' style='margin-bottom: 40px;'> </a> <a class='mh-s' target='_blank' href='https://www.tiktok.com/@estadao'> <img height='40px' width='40px' src='https://assine.estadao.com.br/mkt/emkt-regwall/icon_tiktok.png' alt='' style='margin-bottom: 40px;'> </a> </span> <span class='multi-line'> <a class='mh-s' target='_blank' href='https://twitter.com/Estadao'> <img height='40px' width='40px' src='https://assine.estadao.com.br/mkt/emkt-regwall/icon_twitter.png' alt='' style='margin-bottom: 40px;'> </a> <a class='mh-s' target='_blank' href='https://www.youtube.com/user/estadao/videos'> <img height='40px' width='40px' src='https://assine.estadao.com.br/mkt/emkt-regwall/icon_youtube.png' alt='' style='margin-bottom: 40px;'> </a> <a class='mh-s' target='_blank' href='https://brasil.estadao.com.br/blogs/estadao-podcasts/'> <img height='40px' width='40px' src='https://assine.estadao.com.br/mkt/emkt-regwall/icon_podcast.png' alt='' style='margin-bottom: 40px;'> </a> </span> </p></td></tr><tr> <td class=''><tr><td><table role='presentation' width='100%' align='center' style='border-spacing:0; text-align: center; background:#F2F2F2; padding-top:10px; padding-right:30px; padding-left:30px; padding-bottom:10px;'><tbody><tr style='display: flex;'> <td class='multi-line' style='width:25%;'><a href='https://chat.directtalk.com.br/static/?chatId=ee24070d-da56-40f7-872f-ca47bcef426a?utm_source=estadao:email-mkt&utm_medium=email-mkt&utm_campaign=boas-vindas-regwall:c&utm_content=link:::&utm_term=::::' target='_blank' display='block' style='font-size: 16px; font-weight:bold; line-height:20px; color:#2575E8; text-decoration: underline; display: inline-block;'>CHAT</a></td><td class='multi-line' style='width:50%;'><a href='https://meu.estadao.com.br/?utm_source=estadao:email-mkt&utm_medium=email-mkt&utm_campaign=boas-vindas-regwall:c&utm_content=link:::&utm_term=::::' target='_blank' display='block' style='font-size: 16px; font-weight:bold; line-height:20px; color:#2575E8; text-decoration: underline; display: inline-block;'>CENTRAL DE ATENDIMENTO</a></td><td class='multi-line' style='width:25%;'><a href='https://api.whatsapp.com/send?phone=551140035323?utm_source=estadao:email-mkt&utm_medium=email-mkt&utm_campaign=boas-vindas-regwall:c&utm_content=link:::&utm_term=::::' target='_blank' display='block' style='font-size: 16px; font-weight:bold; line-height:20px; color:#2575E8; text-decoration: underline; display: inline-block;'>WHATSAPP</a></td></tr></td></tr></tbody> </table> <div> <p class='text-xs-midnight-blue-regular-14 mh-xl' style='margin-top: 20px;'>Você está recebendo esta mensagem porque se cadastrou ou tem relacionamento com alguma das empresas do Grupo Estado. </p></div><div class='footer2'><tr> <td class='header'> <a href='https://estadao.com.br?utm_source=estadao:email-mkt&utm_medium=email-mkt&utm_campaign=boas-vindas-regwall:c&utm_content=link:logo-inferior-boas-vindas-regwall::&utm_term=::::' target='_blank'> <img class='logo' src='https://assine.estadao.com.br/mkt/emkt-regwall/grupo%203288.png' alt='Estadão'> </a></td></tr></div></div></div></td><td>&nbsp;</td></tr></tbody> </table></body></html>"
+
+                        var dataEmail = {
+                            "from_email": "assineagora@assine.estadao.com",
+                            "from_name": "Estadão",
+                            "to_email": bodyApi["email_login"],
+                            "to_name": `${bodyApi["nome"]} ${bodyApi["sobrenome"]}`,
+                            "cc": "",
+                            "bcc": "",
+                            "subject": "Seu cadastro foi realizado com sucesso.",
+                            "message": bodyEmail,
+                        }
+
+                        var sendEmail = await consumeApi(dataEmail, "https://api.estadao.com.br/users/mail/send");
+
+                        offers.classList.add("visually-hidden");
+                        changeScreen(registerSuccess, registerScreen);
+                        if (window.dataLayerEstadao) {
+                            window.dataLayerEstadao.push({
+                                event: "genericEvent",
+                                genericCategory: "Regwall",
+                                genericAction: "show",
+                                genericLabel: "regwall_mensagem-sucesso",
+                            });
+                        }
+                        setTimeout(() => {
+                            document.location.reload(true);
+                        }, 3000);
+
+                        return
+                    }
+
+                    if (registerByApi.error.email_existe) {
+                        var email_login_message = document.querySelector(".email_login_message");
+
+                        email_login_message.classList.remove("visually-hidden");
+                        email_login_message.innerHTML = registerByApi.error.message
+
+                        return
+                    }
+
+                }
+
+            });
+        }
+        let email_existe = false;
+        const inputLogin = document.querySelector("input[name=email_login]");
+
+        document.querySelector("#forget-password").addEventListener("click", () => {
+            changeScreen(document.querySelector(".change-password"), document.querySelector(".login"));
+            if (window.dataLayerEstadao) {
+                window.dataLayerEstadao.push({
+                    event: "genericEvent",
+                    genericCategory: "Regwall",
+                    genericAction: "show",
+                    genericLabel: "regwall_esqueci_senha",
+                });
+            }
+            document.querySelector('input[name="email"]').value = inputLogin.value;
+
+            document.querySelectorAll(".buttom__back").forEach( e => {
+                e.addEventListener("click", () => {
+                    changeScreen(document.querySelector(".login"), document.querySelector(".change-password"));
+                })
+            })
+            return
+        });
+
+        formLogin.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            if (!email_existe && valida.defaultInput(inputLogin.value) && valida.email(inputLogin.value)) {
+                inputLogin.classList.remove("buttom__form__error");
+                inputLogin.nextElementSibling.innerHTML = "";
+                let bodyApi = {};
+                bodyApi[inputLogin.getAttribute('name')] = inputLogin.value;
+                var registerByApi = await consumeApi(bodyApi, "https://api.estadao.com.br/users/register");
+
+                if (!registerByApi.error.email_existe) {
+                    document.querySelector(".login").classList.add("visually-hidden")
+                    document.querySelector(".register").classList.remove("visually-hidden")
+
+                    if (window.dataLayerEstadao) {
+                        window.dataLayerEstadao.push({
+                            event: "genericEvent",
+                            genericCategory: "Regwall",
+                            genericAction: "show",
+                            genericLabel: "regwall_cadastro",
+                        });
+                    }
+
+                    formRegister = document.querySelector("#form-register");
+                    formRegisterFc(formRegister, inputLogin.value);
+
+                    document.querySelectorAll(".buttom__back").forEach( e => {
+                        e.addEventListener("click", () => {
+                            changeScreen(document.querySelector(".login"), document.querySelector(".register"));
+                        })
+                    })
+                    return
+                }
+
+                noVerify.forEach(item => {
+                    item.classList.remove("d-none")
+                });
+                document.querySelectorAll(".buttom__back").forEach( e => {
+                    e.addEventListener("click", () => {
+                        noVerify.forEach(item => {
+                            item.classList.add("d-none")
+                        });
+                        email_existe = false
+                    })
+                })
+
+                if (window.dataLayerEstadao) {
+                    window.dataLayerEstadao.push({
+                        event: "genericEvent",
+                        genericCategory: "Regwall",
+                        genericAction: "show",
+                        genericLabel: "regwall_login",
+                    });
+                }
+
+                email_existe = true
+                return
+            } else {
+                inputLogin.classList.add("buttom__form__error");
+                inputLogin.nextElementSibling.innerHTML = `O Campo ${inputLogin.getAttribute("placeholder")} é Obrigatório`;
+            }
+
+            if (email_existe) {
+
+                var inputs = document.querySelectorAll("#form-login input[name]");
+
+                let bodyApi = {};
+                let formValid = true;
+
+                for (var i in inputs) {
+
+                    if (inputs.hasOwnProperty(i) && inputs[i].value === "") {
+                        inputs[i].classList.add("buttom__form__error");
+                        formValid = false;
+                        inputs[i].nextElementSibling.innerHTML = `O Campo ${inputs[i].getAttribute("placeholder")} é Obrigatório`;
+                    } else {
+
+                        if (inputs.hasOwnProperty(i) && inputs[i].getAttribute('name') === "email_login") {
+                            if (!valida.defaultInput(inputs[i].value) || !valida.email(inputs[i].value)){
+                                inputs[i].classList.add("buttom__form__error");
+                                formValid = false;
+                            } else {
+                                inputs[i].classList.remove("buttom__form__error");
+                                inputs[i].nextElementSibling.innerHTML = ""
+                            }
+                        }
+
+                        if (inputs.hasOwnProperty(i) && inputs[i].getAttribute('name') === "password") {
+                            if (!valida.defaultInput(inputs[i].value)){
+                                inputs[i].classList.add("buttom__form__error");
+                                formValid = false;
+                            } else {
+                                inputs[i].classList.remove("buttom__form__error");
+                                inputs[i].nextElementSibling.innerHTML = ""
+                            }
+                        }
+
+                        if (inputs.hasOwnProperty(i) && formValid) {
+                            bodyApi[inputs[i].getAttribute('name')] = inputs[i].value;
+                        }
+                    }
+                }
+                // Realiza Login
+                if (email_existe && formValid) {
+
+                    bodyApi = dataForApiLogin(bodyApi);
+                    if (inputs[i].value !== "") {
+                        var loginByApi = await consumeApi(bodyApi, "https://api.estadao.com.br/users/login?with_cookie=true");
+
+                        if (loginByApi.token) {
+                            var cookies = loginByApi.cookies;
+                            // cria cookies login
+                            for (let i = 0; i < cookies.length; i++) {
+                                var cookie = cookies[i];
+                                setCookie(cookie.name, cookie.value, cookie.expire)
+                            }
+
+                            if (window.dataLayerEstadao) {
+                                window.dataLayerEstadao.push({
+                                    event: "genericEvent",
+                                    genericCategory: "Regwall",
+                                    genericAction: "show",
+                                    genericLabel: "regwall_sucesso_login",
+                                });
+                            }
+
+                            document.location.reload(true);
+                        }
+
+                        if (loginByApi.error.code == 400) {
+                            document.querySelector(".message_error").classList.remove("visually-hidden");
+                            document.querySelector(".message_error").innerHTML = `${loginByApi.error.message}`;
+                        }
+
+                    }
+                }
+            }
+
+        });
+
+        var setCookie = (name, value, days) => {
+            var url = window.location.host;
+            var resultado = url.split(".");
+            if (resultado.includes("www") == true) {
+                var retiraWWW = resultado.shift();
+            }
+            var urlSemWWW = resultado.join(".");
+            var urlCookie = "." + urlSemWWW;
+
+            if (resultado.includes("estadao") == true) {
+                var urlCookie = ".estadao.com.br";
+            }
+
+            var expires = "";
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + days);
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie =
+                name +
+                "=" +
+                (value || "") +
+                expires +
+                ";domain=" +
+                urlCookie +
+                "; path=/";
+        }
+
+
+        const iconPasswordLogin = document.querySelector('.icon-password-login');
+        const iconPasswordRegister = document.querySelector('.icon-password-register');
+        const inputPasswordLogin = document.querySelector('#floatingPasswordLogin');
+        const inputPasswordRegister = document.querySelector('#floatingPasswordRegister');
+        const imgEyesLogin = iconPasswordLogin.firstElementChild;
+        const imgEyesRegister = iconPasswordRegister.firstElementChild;
+
+        iconPasswordLogin.addEventListener('click', function() {
+            imgEyesLogin.classList.toggle('flag-eyes');
+            if (imgEyesLogin.classList.contains('flag-eyes')) {
+                inputPasswordLogin.type = 'password';
+                imgEyesLogin.src = 'https://www.estadao.com.br/paywall-zephr/assets/image/visibility_on_24px.png';
+            } else {
+                inputPasswordLogin.type = 'text';
+                imgEyesLogin.src = 'https://www.estadao.com.br/paywall-zephr/assets/image/visibility_off_24px.png';
+            }
+        });
+
+        iconPasswordRegister.addEventListener('click', function() {
+            imgEyesRegister.classList.toggle('flag-eyes');
+            if (imgEyesRegister.classList.contains('flag-eyes')) {
+
+                inputPasswordRegister.type = 'password';
+                imgEyesRegister.src = 'https://www.estadao.com.br/paywall-zephr/assets/image/visibility_on_24px.png';
+            } else {
+
+                inputPasswordRegister.type = 'text';
+                imgEyesRegister.src = 'https://www.estadao.com.br/paywall-zephr/assets/image/visibility_off_24px.png';
+            }
+        });
+
+        // badget-percent
+        const badgetPercent = document.querySelectorAll('.badget-percent');
+        badgetPercent.forEach(x => {
+            if (x.innerText == ' ') {
+                x.classList.add('d-none')
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>
