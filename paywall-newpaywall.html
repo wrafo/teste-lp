@@ -873,6 +873,10 @@
         align-items: center;
     }
 
+    .content-wrapper {
+        pointer-events: none;
+    }
+
     /* MediaQueries */
     @media (max-width: 576px) {
         .info .badge {
@@ -1136,7 +1140,6 @@
                     </div>
 
                     <div class="my-5 wrapper-subscription-offers">
-                        
                         <a href="{{link-offer-card1-tab1}}?canal=PAY&referrer_url={{blaize.customData.referrer_url}}&paywall_dinamico={{link-identificador}}{{variante_teste-ab}}" id="{{event-ga-card1}}" class="" target="_blank" aria-label="Card de assine agora">
                             <div class="subscription-offers pt-3 mt-2 position-relative">  
                                 <div class="badget-percent d-flex justify-content-center align-items-center flex-column">
@@ -1144,7 +1147,7 @@
                                     <span class="discount-card-p text-uppercase fw-bold">{{text-discount-card1}}</span>
                                 </div>
 
-                                <div class="d-flex justify-content-between flex-column">
+                                <div class="content-wrapper d-flex justify-content-between flex-column">
                                     <div class="offers-info position-relative mb-5 px-3">
                                         <div class="title">
                                             <span class="fw-bold text-uppercase">
@@ -1193,9 +1196,6 @@
                                 </div>
                             </div>
                         </a>
-
-
-
                     </div>
 
                     <div class="d-flex justify-content-center">
