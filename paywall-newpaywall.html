@@ -352,6 +352,10 @@
         max-height: 220px;
     }
 
+    .subscription-offers, ::after {
+        box-sizing: border-box;
+    }
+
     .subscription-offers .badget-percent {
         background-color: red;
         border-radius: 0% 45% 0% 50%;
@@ -407,6 +411,10 @@
         left: 0;
     }
 
+    .offers-desktop-image {
+        display: flex;
+    }
+
     .fs-5 {
         font-size: 18px !important;
     }
@@ -429,10 +437,15 @@
         align-self: center;
     }
 
-    /* Reboot Bootstrap - Override */
-    *,
-    ::after,
-    ::before {
+    input#regwall_input_email, ::after {
+        box-sizing: border-box
+    }
+
+    .yellow-round-circle, ::after {
+        box-sizing: border-box
+    }
+
+    .right-btn, ::after {
         box-sizing: border-box
     }
 
@@ -676,10 +689,6 @@
         font-weight: 700
     }
 
-    figure {
-        margin: 0 0 1rem
-    }
-
     img,
     svg {
         vertical-align: middle
@@ -871,9 +880,11 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        margin-top: 3rem;
+        margin-bottom: 3rem;
     }
 
-    .content-wrapper {
+    .subscription-offers-content-wrapper {
         pointer-events: none;
     }
 
@@ -893,8 +904,12 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            margin-top: 0;
         }
 
+        .offers-desktop-image {
+            display: none;
+        }
     }
 
     @media (max-width: 768px) {
@@ -962,7 +977,7 @@
                         </div>
                     </div>
                     <div class="login">
-                        <span class="position-absolute badge rounded-circle bg-warning d-none d-lg-block d-xl-block">
+                        <span class="yellow-round-circle position-absolute badge rounded-circle bg-warning d-none d-lg-block d-xl-block">
                             <b class="d-flex justify-content-center">Ou</b>
                         </span>
 
@@ -1134,12 +1149,12 @@
                             Estadão, APP Estadão e outros produtos.</p>
                     </div>
 
-                    <div class="d-flex justify-content-center">
+                    <div class="offers-desktop-image justify-content-center">
                         <img src="https://www.estadao.com.br/paywall-zephr/assets/image/devices_desktop@2x.png"
                             alt="Imagem de desktops, Smartphones, Tables e Notebook" class="desktops">
                     </div>
 
-                    <div class="my-5 wrapper-subscription-offers">
+                    <div class="wrapper-subscription-offers">
                         <a href="{{link-offer-card1-tab1}}?canal=PAY&referrer_url={{blaize.customData.referrer_url}}&paywall_dinamico={{link-identificador}}{{variante_teste-ab}}" id="{{event-ga-card1}}" class="" target="_blank" aria-label="Card de assine agora">
                             <div class="subscription-offers pt-3 mt-2 position-relative">  
                                 <div class="badget-percent d-flex justify-content-center align-items-center flex-column">
@@ -1147,7 +1162,7 @@
                                     <span class="discount-card-p text-uppercase fw-bold">{{text-discount-card1}}</span>
                                 </div>
 
-                                <div class="content-wrapper d-flex justify-content-between flex-column">
+                                <div class="subscription-offers-content-wrapper d-flex justify-content-between flex-column">
                                     <div class="offers-info position-relative mb-5 px-3">
                                         <div class="title">
                                             <span class="fw-bold text-uppercase">
@@ -1176,7 +1191,7 @@
                                     <span class="discount-card-p text-uppercase fw-bold">{{discount-card2-tab1}}</span>
                                     <span class="discount-card-p text-uppercase fw-bold">{{text-discount-card2}}</span>
                                 </div>
-                                <div class="content-wrapper d-flex justify-content-between flex-column">
+                                <div class="subscription-offers-content-wrapper d-flex justify-content-between flex-column">
                                     <div class="offers-info position-relative mb-5">
                                         <div class="title">
                                             <span class="fw-bold text-uppercase">
@@ -1199,7 +1214,7 @@
                     </div>
 
                     <div class="d-flex justify-content-center">
-                        <a target="_blank" href="{{link-offer-button}}?referrer_url={{blaize.customData.referrer_url}}&paywall_dinamico={{link-identificador}}" id="{{event-ga-button}}" class="btn btn-outline-light w-75 fw-bolder"
+                        <a target="_blank" href="{{link-offer-button}}?canal=PAY&referrer_url={{blaize.customData.referrer_url}}&paywall_dinamico={{link-identificador}}" id="{{event-ga-button}}" class="right-btn btn btn-outline-light w-75 fw-bolder"
                             aria-label="{{text-button}}">{{text-button}}</a>
                     </div>
                 </section>
@@ -1305,8 +1320,9 @@
                 return re.test(value);
             },
             defaultInput(value) {
-                if (value != "" || value != undefined)
+                if (value != ''){
                     return true
+                }
                 return false
             },
             checkbox(checkbox) {
@@ -1605,6 +1621,12 @@
 
         formLogin.addEventListener("submit", async (e) => {
             e.preventDefault();
+            
+            if (!valida.defaultInput(inputLogin.value)) {
+                inputLogin.classList.add("buttom__form__error");
+                inputLogin.nextElementSibling.innerHTML = `O ${inputLogin.getAttribute("placeholder")} é obrigatório.`;
+                return
+            }
 
             if (!email_existe && valida.defaultInput(inputLogin.value) && valida.email(inputLogin.value)) {
                 inputLogin.classList.remove("buttom__form__error");
@@ -1662,7 +1684,7 @@
                 return
             } else {
                 inputLogin.classList.add("buttom__form__error");
-                inputLogin.nextElementSibling.innerHTML = `O Campo ${inputLogin.getAttribute("placeholder")} é Obrigatório`;
+                inputLogin.nextElementSibling.innerHTML = `O ${inputLogin.getAttribute("placeholder")} digitado é inválido.`;
             }
 
             if (email_existe) {
