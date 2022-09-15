@@ -7,6 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Paywall - Web Components</title>
 
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-W9P88XF');</script>
+    <!-- End Google Tag Manager -->
+
     <!-- CSS Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap-utilities.css" rel="stylesheet">
@@ -87,7 +95,7 @@
         color: var(--text-color);
     }
 
-    .row {
+    .regwall-row {
         margin-right: 0 !important;
         margin-left: 0 !important;
     }
@@ -152,7 +160,7 @@
         background-color: transparent;
     }
 
-    .form-control {
+    .regwall-form-control {
         display: block;
         width: 100%;
         padding: 0.375rem 0.75rem;
@@ -175,7 +183,7 @@
         text-align: left;
     }
 
-    .form-floating>.form-control,
+    .form-floating>.regwall-form-control,
     .form-floating>.form-select {
         height: calc(3.5rem + 2px);
         line-height: 1.25;
@@ -195,14 +203,14 @@
 
     /* Wrappers */
 
-    .offers {
+    .regwall-offers {
         background-color: var(--blue-color);
         background-image: url('https://www.estadao.com.br/paywall-zephr/assets/image/grade_bolas_azul.png');
         background-position: top 3% left 5%;
         background-repeat: no-repeat;
     }
 
-    .offers .desktops {
+    .regwall-offers .desktops {
         height: 120px;
     }
 
@@ -210,16 +218,16 @@
         border-radius: 0 0 18px 18px;
     }
 
-    .subscription-offers .gifts-subscription a {
+    .subscription-regwall-offers .gifts-subscription a {
         color: var(--white);
     }
 
-    .subscription-offers.pt-3.mt-2.position-relative a {
+    .subscription-regwall-offers.pt-3.mt-2.position-relative a {
         color: #fff;
     }
 
     /* Forms */
-    .form-floating>.form-control {
+    .form-floating>.regwall-form-control {
         height: 50px;
     }
 
@@ -250,6 +258,10 @@
         top: -15px;
         height: 3em;
         width: 3em;
+    }
+
+    .checkbox-wrapper {
+        flex-direction: column;
     }
 
     .keepin-conected {
@@ -337,7 +349,7 @@
     }
 
     /* CardsOffers */
-    .subscription-offers {
+    .subscription-regwall-offers {
         width: 160px;
         min-width: 160px;
         background-image: url('https://www.estadao.com.br/paywall-zephr/assets/image/efeito_card_promo.png');
@@ -352,11 +364,11 @@
         max-height: 220px;
     }
 
-    .subscription-offers, ::after {
+    .subscription-regwall-offers, ::after {
         box-sizing: border-box;
     }
 
-    .subscription-offers .badget-percent {
+    .subscription-regwall-offers .badget-percent {
         background-color: red;
         border-radius: 0% 45% 0% 50%;
         font-size: 10px;
@@ -366,32 +378,32 @@
         right: 0;
     }
 
-    .subscription-offers .title {
+    .subscription-regwall-offers .title {
         margin-bottom: 20px;
         margin-top: 25px;
         font-size: 12px;
         text-transform: uppercase;
     }
 
-    .subscription-offers .observation {
+    .subscription-regwall-offers .observation {
         font-size: 9px;
      }
 
-    .subscription-offers .price {
+    .subscription-regwall-offers .price {
         margin-bottom: 5px;
         font-size: 14px;
     }
 
-    .subscription-offers .price>span {
+    .subscription-regwall-offers .price>span {
         margin-left: 5px;
         margin-right: 5px;
     }
 
-    .subscription-offers .message {
+    .subscription-regwall-offers .message {
         font-size: 12px;
     }
 
-    .subscription-offers .gifts-subscription {
+    .subscription-regwall-offers .gifts-subscription {
         background-color: green;
         position: absolute;
         bottom: 0;
@@ -403,7 +415,7 @@
         align-items: center;
     }
 
-    .subscription-offers .gifts-subscription-image {
+    .subscription-regwall-offers .gifts-subscription-image {
         position: absolute;
         bottom: 0;
         width: 100%;
@@ -411,7 +423,7 @@
         left: 0;
     }
 
-    .offers-desktop-image {
+    .regwall-offers-desktop-image {
         display: flex;
     }
 
@@ -449,6 +461,14 @@
         box-sizing: border-box
     }
 
+    input#floatingPasswordLogin, ::after {
+        box-sizing: border-box
+    }
+
+    input.regwall-form-control.buttom__form, ::after {
+        box-sizing: border-box
+    }
+
     @media (prefers-reduced-motion:no-preference) {
         :root {
             scroll-behavior: smooth
@@ -459,7 +479,7 @@
         margin-bottom: 0;
     }
 
-    body {
+    .regwall-body {
         margin: 0;
         font-family: var(--bs-body-font-family);
         font-size: var(--bs-body-font-size);
@@ -876,7 +896,7 @@
         display: none !important
     }
 
-    .wrapper-subscription-offers {
+    .wrapper-subscription-regwall-offers {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -884,7 +904,7 @@
         margin-bottom: 3rem;
     }
 
-    .subscription-offers-content-wrapper {
+    .subscription-regwall-offers-content-wrapper {
         pointer-events: none;
     }
 
@@ -899,7 +919,7 @@
             border-bottom: none;
         }
 
-        .wrapper-subscription-offers {
+        .wrapper-subscription-regwall-offers {
             flex-direction: column;
             display: flex;
             justify-content: center;
@@ -907,7 +927,7 @@
             margin-top: 0;
         }
 
-        .offers-desktop-image {
+        .regwall-offers-desktop-image {
             display: none;
         }
     }
@@ -918,7 +938,7 @@
             top: 426px;
         }
 
-        .offers {
+        .regwall-offers {
             margin-top: 24px;
         }
     }
@@ -940,14 +960,14 @@
 
 </style>
 
-<body>
+<body class="regwall-body">
 
     <div class="container">
         <div class="wrapper d-flex justify-content-center align-items-center" style="max-width: 700px; margin: 0 auto;">
-            <div class="row">
+            <div class="row regwall-row">
                 <div id="register-success" class="register-success visually-hidden">
                     <div class="d-flex justify-content-center align-items-center">
-                        <div class="row py-5">
+                        <div class="row regwall-row py-5">
                             <section class="d-flex justify-content-lg-start align-items-center flex-column text-center">
                                 <img src="https://www.estadao.com.br/paywall-zephr/assets/image/Confirma_Cadastro_ICO.png"
                                     alt="Ícone de confirmação do cadastro" class="m-2">
@@ -992,13 +1012,13 @@
                             <div class="visually-hidden message_error form-floating mb-3"></div>
 
                             <div class="form-floating mb-3">
-                                <input id="regwall_input_email" type="email" name="email_login" class="form-control buttom__form"
+                                <input id="regwall_input_email" type="email" name="email_login" class="regwall-form-control buttom__form"
                                     placeholder="E-mail" required>
                                 <small class="error__message"></small>
                             </div>
 
                             <div class="form-floating mb-3 no-verify d-none">
-                                <input name="password" type="password" class="form-control buttom__form no-verify"
+                                <input name="password" type="password" class="regwall-form-control buttom__form no-verify"
                                     id="floatingPasswordLogin" placeholder="Senha" required>
                                 <small class="error__message"></small>
                                 <div class="icon-password-login icon-password">
@@ -1043,31 +1063,31 @@
 
                         <form id="form-register" action="" class="form text-center" style="margin: 0 15px;" novalidate>
                             <div class="form-floating mb-3">
-                                <input name="email_login" type="email" class="form-control buttom__form"
+                                <input name="email_login" type="email" class="regwall-form-control buttom__form"
                                     placeholder="E-mail" required>
                                 <small class="error__message"></small>
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input name="nome" type="text" class="form-control buttom__form"
+                                <input name="nome" type="text" class="regwall-form-control buttom__form"
                                     placeholder="Nome" required>
                                 <small class="error__message"></small>
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input name="sobrenome" type="text" class="form-control buttom__form"
+                                <input name="sobrenome" type="text" class="regwall-form-control buttom__form"
                                     placeholder="Sobrenome" required>
                                 <small class="error__message"></small>
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input name="telefone" id="telefone" type="text" class="form-control buttom__form"
+                                <input name="telefone" id="telefone" type="text" class="regwall-form-control buttom__form"
                                     placeholder="Telefone" required>
                                 <small class="error__message"></small>
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input name="password" type="password" class="form-control buttom__form"
+                                <input name="password" type="password" class="regwall-form-control buttom__form"
                                     id="floatingPasswordRegister" placeholder="Senha" required>
                                 <small class="error__message"></small>
                                 <div class="icon-password-register icon-password">
@@ -1077,12 +1097,20 @@
                             </div>
 
                             <div class="mb-3">
-                                <div class="d-flex justify-content-between">
+                                <div class="checkbox-wrapper d-flex justify-content-between">
                                     <div class="keepin-conected">
                                         <div class="form-check d-flex align-items-center">
                                             <input id="aceite_newsletter" name="aceite_newsletter" class="form-check-input" type="checkbox" value="S"  required>
                                             <label class="form-check-label mx-1" for="flexCheckDefault" style="font-size: 11px;">
                                                 Quero conhecer as Newsletters do Estadão.
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="keepin-conected">
+                                        <div class="form-check d-flex align-items-center">
+                                            <input id="id_newsletter" name="id_newsletter" class="form-check-input" type="checkbox" value="2"  required checked>
+                                            <label class="form-check-label mx-1" for="flexCheckDefault" style="font-size: 11px;">
+                                                Quero receber a newsletters de Política e Eleições.
                                             </label>
                                         </div>
                                     </div>
@@ -1108,7 +1136,7 @@
 
                         <form id="form-change-password" class="text-center" style="margin: 0 15px;">
                             <div class="form-floating mb-3">
-                                <input name="email" type="email" class="form-control buttom__form"
+                                <input name="email" type="email" class="regwall-form-control buttom__form"
                                     placeholder="E-mail">
                                 <small class="error__message"></small>
                             </div>
@@ -1135,9 +1163,9 @@
                     </div>
                 </section>
 
-                <section id="offers" class="offers col-md-7 col-12 pb-5">
+                <section id="regwall-offers" class="regwall-offers col-md-7 col-12 pb-5">
                     <div
-                        class="row d-block d-sm-none position-absolute d-flex justify-content-center align-items-center w-100">
+                        class="row regwall-row d-block d-sm-none position-absolute d-flex justify-content-center align-items-center w-100">
                         <span
                             class="position-absolute badge-responsive rounded-circle bg-warning d-flex justify-content-center align-items-center">
                             Ou
@@ -1149,21 +1177,21 @@
                             Estadão, APP Estadão e outros produtos.</p>
                     </div>
 
-                    <div class="offers-desktop-image justify-content-center">
+                    <div class="regwall-offers-desktop-image justify-content-center">
                         <img src="https://www.estadao.com.br/paywall-zephr/assets/image/devices_desktop@2x.png"
                             alt="Imagem de desktops, Smartphones, Tables e Notebook" class="desktops">
                     </div>
 
-                    <div class="wrapper-subscription-offers">
+                    <div class="wrapper-subscription-regwall-offers">
                         <a href="{{link-offer-card1-tab1}}?canal=PAY&referrer_url={{blaize.customData.referrer_url}}&paywall_dinamico={{link-identificador}}{{variante_teste-ab}}" id="{{event-ga-card1}}" class="" target="_blank" aria-label="Card de assine agora">
-                            <div class="subscription-offers pt-3 mt-2 position-relative">  
+                            <div class="subscription-regwall-offers pt-3 mt-2 position-relative">  
                                 <div class="badget-percent d-flex justify-content-center align-items-center flex-column">
                                     <span class="discount-card-p text-decoration-none text-uppercase fw-bold">{{discount-card1-tab1}}</span>
                                     <span class="discount-card-p text-uppercase fw-bold">{{text-discount-card1}}</span>
                                 </div>
 
-                                <div class="subscription-offers-content-wrapper d-flex justify-content-between flex-column">
-                                    <div class="offers-info position-relative mb-5 px-3">
+                                <div class="subscription-regwall-offers-content-wrapper d-flex justify-content-between flex-column">
+                                    <div class="regwall-offers-info position-relative mb-5 px-3">
                                         <div class="title">
                                             <span class="fw-bold text-uppercase">
                                                 {{title-card1-tab1}}
@@ -1186,13 +1214,13 @@
                         </a>
 
                         <a href="{{link-offer-card2-tab1}}?canal=PAY&referrer_url={{blaize.customData.referrer_url}}&paywall_dinamico={{link-identificador}}{{variante_teste-ab}}" id="{{event-ga-card2}}" class="text-decoration-none text-uppercase fw-bold" target="_blank" aria-label="Link na imagem de promoções e brindes">
-                            <div class="subscription-offers pt-3 mt-2 px-4 position-relative">
+                            <div class="subscription-regwall-offers pt-3 mt-2 px-4 position-relative">
                                 <div class="badget-percent d-flex justify-content-center align-items-center flex-column">
                                     <span class="discount-card-p text-uppercase fw-bold">{{discount-card2-tab1}}</span>
                                     <span class="discount-card-p text-uppercase fw-bold">{{text-discount-card2}}</span>
                                 </div>
-                                <div class="subscription-offers-content-wrapper d-flex justify-content-between flex-column">
-                                    <div class="offers-info position-relative mb-5">
+                                <div class="subscription-regwall-offers-content-wrapper d-flex justify-content-between flex-column">
+                                    <div class="regwall-offers-info position-relative mb-5">
                                         <div class="title">
                                             <span class="fw-bold text-uppercase">
                                                 {{title-card2-tab1}}
@@ -1250,11 +1278,23 @@
             screenOut.classList.add("visually-hidden")
             screenIn.classList.remove("visually-hidden")
         }
+       
+        function setCookies (cookies) {
+            cookies.map((cookie)=>{
+                let = {name, value, expire, domain, path} = cookie;
+            
+                var date = new Date();
+                date.setTime(date.getTime() + expire);
+                expires = date.toUTCString();
+
+                document.cookie = name+"="+(value || "") + "; "+"expires=" + expires + "; "+ "domain=" + domain + "; path=/";
+            });
+        }
 
         const changePasswordSuccess = document.querySelector("#change-password-success");
         const registerSuccess = document.querySelector("#register-success");
         const registerScreen = document.querySelector("#register");
-        const offers = document.querySelector("#offers");
+        const offers = document.querySelector("#regwall-offers");
 
         const btnFormLogin = document.querySelector("#btn__form-login");
         const noVerify = document.querySelectorAll(".no-verify:not(input[name])");
@@ -1546,25 +1586,7 @@
                         var cookies = send_data_form_login.cookies;
 
                         // cria cookies login
-                        for (let i = 0; i < cookies.length; i++) {
-                            var cookie = cookies[i];
-                            setCookie(cookie.name, cookie.value, cookie.expire)
-                        }
-
-                        var bodyEmail = "<!DOCTYPE html><html><head><meta http-equiv='Content-Type' content='text/html; charset=UTF-8'> <meta name='viewport' content='width=device-width'> <title>Estadão - Email</title> <style>/* ------------------------------------- GLOBAL RESETS ------------------------------------- */ /*All the styling goes here*/ img{border: none; -ms-interpolation-mode: bicubic; max-width: 100%;}body{background-color: #f6f6f6; font-family: Arial, Helvetica, sans-serif; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.4; margin: 0; padding: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;}table{border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;}table td{font-family: Arial, Helvetica, sans-serif; font-size: 14px; vertical-align: top;}/* ------------------------------------- BODY & CONTAINER ------------------------------------- */ .body{background-color: #f6f6f6; width: 100%;}/* Set a max-width, and make it display as block so it will automatically stretch to that width, but will also shrink down on a phone or something */ .container{display: block; margin: 0 auto !important; /* makes it centered */ max-width: 580px; padding: 10px; width: 580px;}/* This should also be a block element, so that it will fill 100% of the .container */ .content{box-sizing: border-box; display: block; margin: 0 auto; max-width: 580px; padding: 10px;}/* ------------------------------------- HEADER, FOOTER, MAIN ------------------------------------- */ .main{background: #EBECF0; width: 100%;}.header{padding: 0; box-sizing: border-box; background: #2575e8;}.cabecalho{padding: 0; box-sizing: border-box; background: #fff;}.blue-section{background: #2575e8; width: 100%;}.gray-section{background: #d3d3d3; width: 100%;}.footer{background: #f5f5f5; padding: 20px 24px; text-align: center; width: 100%; box-sizing: border-box;}.footer2{background: #f5f5f5; padding: 5px 5px; text-align: center; width: 100%; box-sizing: border-box;}.main-section{background-color: white; padding: 40px 64px; text-align: center; width: 100%; box-sizing: border-box;}/* custom for media */ .app-media-section{background: #eaecf1; width: 100%; text-align: center;}.app-media-section a{text-decoration: none;}.app-media-title, .app-media-title p{padding: 0; margin: 0; text-align: center; font-weight: 600; font-size: 16px; line-height: 24px; color: #2575e8;}.pb-s{padding-bottom: 8px;}.pt-s{padding-top: 8px;}.p-m{padding: 16px !important;}.p-l{padding: 24px !important;}.pr-s{padding-right: 8px;}.ph-m{padding-right: 16px; padding-left: 16px;}.mr-s{margin-right: 8px;}.mr-m{margin-right: 16px;}.mh-s{margin-right: 8px; margin-left: 8px;}.mh-xs{margin-right: 4px; margin-left: 4px;}.mv-l{margin-top: 24px; margin-bottom: 24px;}.mh-xl{margin-right: 48px; margin-left: 48px;}.mh-xxl{margin-right: 96px; margin-left: 96px;}.mt-m{margin-top: 16px;}.mt-l{margin-top: 24px !important;}.mt-xl{margin-top: 48px !important;}.mr-l{margin-right: 24px;}.mt-s{margin-top: 8px;}.mt-m{margin-top: 16px !important;}.mt-l{margin-top: 24px;}.mb-xs{margin-bottom: 4px;}.mb-s{margin-bottom: 8px;}.mb-m{margin-bottom: 16px !important;}.mb-l{margin-bottom: 24px;}.mb-xl{margin-bottom: 48px;}.pb-m{padding-bottom: 16px;}.pt-m{padding-top: 16px;}.logo{display: block; margin: 24px auto;}.wrapper{padding: 0; box-sizing: border-box;}.box{padding: 0 16px;}.button-wrapper{padding: 28px 64px 20px;}/* ------------------------------------- TYPOGRAPHY ------------------------------------- */ h1, h2, h3, h4, p, ul, ol{font-family: Arial, Helvetica, sans-serif; margin: 0;}p li, ul li, ol li{list-style-position: inside; margin-left: 5px;}a{text-decoration: none;}.text-xl-royal-blue-bold-31{font-size: 26px; font-weight: bold; line-height: 1.19; color: #2575e8;}.text-lg-midnight-blue-bold-26{font-size: 20px; font-weight: bold; line-height: 1.3; color: #002a67;}.text-lg-royal-blue-bold-22{font-size: 20px; font-weight: bold; line-height: 1.1; color: #2575e8;}.text-lg-royal-white-bold-22{font-size: 20px; font-weight: bold; line-height: 1.1; color: white;}.text-lg-midnight-blue-bold-22{font-size: 20px; font-weight: bold; line-height: 1.1; color: #002a67;}.text-lg-dark-indigo-bold-22{font-size: 20px; font-weight: bold; line-height: 1.1; color: #07103e;}.text-lg-dark-indigo-regular-22{font-size: 20px; font-weight: normal; line-height: 1.1; color: #07103e;}.text-base-midnight-blue-bold-22{font-size: 18px; font-weight: bold; line-height: 1.22; color: #002a67;}.text-base-royal-blue-bold-21{font-size: 18px; font-weight: bold; line-height: 1.17; color: #2575e8;}.text-sm-dark-gray-bold-20{font-size: 16px; font-weight: bold; line-height: 1.25; color: #232323;}.text-sm-dark-gray-regular-20{font-size: 16px; font-weight: normal; line-height: 1.25; color: #232323;}.text-sm-royal-blue-bold-20{font-size: 16px; font-weight: bold; line-height: 1.25; color: #2575e8;}.text-sm-royal-blue-bold-18{font-size: 16px; font-weight: bold; line-height: 1.13; color: #2575e8;}.text-sm-midnight-blue-bold-18{font-size: 16px; font-weight: bold; line-height: 1.13; color: #002a67;}.text-sm-dove-gray-bold-18{font-size: 16px; font-weight: bold; line-height: 1.13; color: #707070;}.text-sm-dark-indigo-bold-18{font-size: 16px; font-weight: bold; line-height: 1.13; color: #07103e;}.text-sm-dark-indigo-regular-18{font-size: 14px; font-weight: 500; line-height: 1.50; color: #002a67;}.text-sm-black-bold-20{font-size: 16px; font-weight: bold; line-height: 1.25; color: #002a67;}.text-sm-black-regular-20{font-size: 16px; font-weight: normal; line-height: 1.25; color: #002a67;}.text-sm-white-regular-20{font-size: 16px; font-weight: normal; line-height: 1.25; color: white;}.text-sm-dark-gray-bold-18{font-size: 16px; font-weight: bold; line-height: 1.13; color: #232323;}.text-sm-dark-gray-regular-18{font-size: 16px; font-weight: normal; line-height: 1.13; color: #232323;}.text-xs-midnight-blue-regular-12{font-size: 10px; font-weight: normal; line-height: 1.2; color: #002a67;}.text-xs-midnight-blue-regular-14{font-size: 10px; font-weight: normal; line-height: 1.4; color: #002a67;}.underline{text-decoration: underline;}/*------------------ Background */ .bg__ice-blue{background: #f3f8ff;}.bg__royal-blue{background: #2575e8;}.bg__peacock-blue{background: #0052a7;}.rounded--big{border-radius: 20px;}.width-full{width: 100%;}/* ------------------------------------- BUTTONS ------------------------------------- */ .button{background: #2575e8; text-align: center; display: block; border-radius: 12px; white-space: nowrap; margin: auto; padding: 18px 0; color: white!important; font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-size: 16px; line-height: 1.13; text-decoration: none;}.button--white{background: white; text-align: center; display: block; border-radius: 12px; white-space: nowrap; margin: auto; padding: 18px 0; color: #2575e8; font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-size: 16px; line-height: 1.13; text-decoration: none;}/* ------------------------------------- OTHER STYLES THAT MIGHT BE USEFUL ------------------------------------- */ .last{margin-bottom: 0;}.first{margin-top: 0;}.align-center{text-align: center;}.align-right{text-align: right;}.align-left{text-align: left;}.clear{clear: both;}.mt0{margin-top: 0;}.mb0{margin-bottom: 0;}hr{border: 0; height: 1px; background-color: #d8d8d8; margin: 20px 0;}.hide-option{display: none !important;}.inline-middle{display: inline-block; vertical-align: middle;}.block{display: block;}/* ------------------------------------- RESPONSIVE AND MOBILE FRIENDLY STYLES ------------------------------------- */ @media only screen and (max-width: 620px){table[class=body] .content{padding: 0 !important;}table[class=body] .container{padding: 0 !important; width: 100% !important;}table[class=body] .main{border-left-width: 0 !important; border-radius: 0 !important; border-right-width: 0 !important;}table[class=body] .button table{width: 100% !important;}table[class=body] .button a{width: 100% !important;}table[class=body] .img-responsive{height: auto !important; max-width: 100% !important; width: auto !important;}.multi-line{display: block;}.main-section{padding: 40px 36px;}.box{padding: 0;}.button-wrapper{padding: 28px 32px 20px;}}/* ------------------------------------- PRESERVE THESE STYLES IN THE HEAD ------------------------------------- */ @media all{.ExternalClass{width: 100%;}.ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div{line-height: 100%;}.apple-link a{color: inherit !important; font-family: inherit !important; font-size: inherit !important; font-weight: inherit !important; line-height: inherit !important; text-decoration: none !important;}#MessageViewBody a{color: inherit; text-decoration: none; font-size: inherit; font-family: inherit; font-weight: inherit; line-height: inherit;}}</style> <style>.white-section{background-color: white; padding: 40px 64px; text-align: center; width: 100%; box-sizing: border-box;}.ice-blue-section{background-color: #f3f8ff; padding: 40px 64px; text-align: center; width: 100%; box-sizing: border-box;}.portal_estadao_option{width: calc(100% / 3 - 32px); float: left; padding: 16px; height: 136px;}.portal_estadao_option_text{margin-top: 16px;}.app_estadao_option{width: calc(100% / 3 - 32px); float: left; padding: 10px 16px 0px 16px; height: 166px;}.app_estadao_option_text{margin-top: 16px;}.button-container{max-width: 210px; margin: 24px auto 0;}.image{display: block; margin: 0 auto;}@media only screen and (max-width: 620px){.white-section, .ice-blue-section{padding: 40px 16px;}.portal_estadao_option{width: calc(100% / 2 - 32px); padding: 12px 16px; height: 128px;}.portal_estadao_option_text{margin-top: 8px;}.app_estadao_option{width: calc(100% / 2 - 32px); padding: 12px 16px; height: 158px;}.app_estadao_option_text{margin-top: 8px;}}</style></head><body class=''> <table role='presentation' border='0' cellpadding='0' cellspacing='0' class='body'> <tbody> <tr> <td>&nbsp;</td><td class='container'> <div class='content'> <table role='presentation' class='main'> <tbody> <tr> <td class='header'> <a href='https://estadao.com.br?utm_source=estadao:email-mkt&utm_medium=email-mkt&utm_campaign=boas-vindas-regwall:c&utm_content=link:logo-superior-boas-vindas-regwall::&utm_term=::::' target='_blank'> <img class='logo' src='https://assine.estadao.com.br/mkt/emkt-regwall/grupo%203288.png' alt='Estadão'> </a></td></tr><tr> <td class=cabecalho> <img src='https://assine.estadao.com.br/mkt/emkt-regwall/grupo%20de%20m%C3%A1scara%209.png' alt='Topo' style='margin: auto; display: block'> </td></tr></tbody> </table> <div><div class='white-section'> <table> <tbody> <tr> <td> <p class='text-sm-black-bold-20' style='margin-bottom: 20px;' >Agora você tem acesso a 3 conteúdos mensais do portal Estadão</p><p class='text-sm-dark-indigo-regular-18' style='margin-bottom: 20px;' >A Bem-vindo(a)</p><p class='text-sm-dark-indigo-regular-18' style='margin-bottom: 20px;' >O portal Estadão traz uma infinidade de conteúdos, que inclui notícias em tempo real, matérias especiais, Colunas, Opinião, Acervo e muito mais.</p><p class='text-sm-dark-indigo-regular-18' style='margin-bottom: 20px;' >Para você conhecer um pouco do trabalho desenvolvido por um dos jornais de maior prestígio e credibilidade do País, liberamos seu acesso a 3 matérias mensais.</p><p class='text-sm-dark-indigo-regular-18' style='margin-bottom: 20px;' >Aproveite!</p><div class='button-container'> <a class='button' href='https://estadao.com.br?utm_source=estadao:email-mkt&utm_medium=email-mkt&utm_campaign=boas-vindas-regwall:c&utm_content=botao:ir-para-o-site::&utm_term=::::' target='_blank' style='margin-bottom: 40px;'>Ir para o site</a> </div></td></tr><tr> <td><p class='text-sm-black-bold-20' style='margin-bottom: 10px;' >Editorias em destaque:</p><div class='app_estadao_option'><a href='https://politica.estadao.com.br/?utm_source=estadao:email-mkt&utm_medium=email-mkt&utm_campaign=boas-vindas-regwall:c&utm_content=link:sub-home-política::&utm_term=::::' target='_blank'> <img class='' src='https://assine.estadao.com.br/mkt/emkt-regwall/politica_ico@2x.png' alt='App Estadão - Personalize' width='auto' height='70px' style='margin-bottom: 20px;'> <p class='text-sm-dark-indigo-regular-18'>Política</p></a> </div><div class=' app_estadao_option'><a href='https://economia.estadao.com.br/?utm_source=estadao:email-mkt&utm_medium=email-mkt&utm_campaign=boas-vindas-regwall:c&utm_content=link:sub-home-economia::&utm_term=::::' target='_blank'> <img class='' src='https://assine.estadao.com.br/mkt/emkt-regwall/economia_ico@2x.png' alt='App Estadão - Colunistas' width='auto' height='70px' style='margin-bottom: 20px;'> <p class='text-sm-dark-indigo-regular-18'>Economia</p></a> </div><div class='app_estadao_option'><a href='https://internacional.estadao.com.br/?utm_source=estadao:email-mkt&utm_medium=email-mkt&utm_campaign=boas-vindas-regwall:c&utm_content=link:sub-home-internacional::&utm_term=::::' target='_blank'> <img class='' src='https://assine.estadao.com.br/mkt/emkt-regwall/internacional_ico@2x.png' alt='App Estadão - Notificações' width='auto' height='70px' style='margin-bottom: 20px;'> <p class='text-sm-dark-indigo-regular-18'>Internacional</p></a> </div><div class='app_estadao_option'><a href='https://cultura.estadao.com.br/?utm_source=estadao:email-mkt&utm_medium=email-mkt&utm_campaign=boas-vindas-regwall:c&utm_content=link:sub-home-cultura::&utm_term=::::' target='_blank'> <img class='' src='https://assine.estadao.com.br/mkt/emkt-regwall/cultura_ico@2x.png' alt='App Estadão - Salvar' width='auto' height='70px' style='margin-bottom: 20px;'> <p class='text-sm-dark-indigo-regular-18'>Cultura</p></a> </div><div class='app_estadao_option'><a href='https://esportes.estadao.com.br/?utm_source=estadao:email-mkt&utm_medium=email-mkt&utm_campaign=boas-vindas-regwall:c&utm_content=link:sub-home-esporte::&utm_term=::::' target='_blank'> <img class='' src='https://assine.estadao.com.br/mkt/emkt-regwall/esporte_ico@2x.png' alt='App Estadão - Vídeos' width='auto' height='70px' style='margin-bottom: 20px;'> <p class='text-sm-dark-indigo-regular-18'>Esporte</p></a> </div><div class='app_estadao_option'><a href='https://saude.estadao.com.br/?utm_source=estadao:email-mkt&utm_medium=email-mkt&utm_campaign=boas-vindas-regwall:c&utm_content=link:sub-home-saude::&utm_term=::::' target='_blank'> <img class='' src='https://assine.estadao.com.br/mkt/emkt-regwall/saude_ico@2x.png' alt='App Estadão - Black Light' width='auto' height='70px' style='margin-bottom: 20px;'> <p class='text-sm-dark-indigo-regular-18'>Saúde</p></a> </div></td></tr></tbody> </table></div><div class='footer'> <table role='presentation' border='0' cellpadding='0' cellspacing='0'> <tbody> <tr> <td class='wrapper'> <p style='padding-top: 10px;'> <span class='multi-line'> <a class='mh-s' target='_blank' href='https://www.facebook.com/estadao/'> <img height='40px' width='40px' src='https://assine.estadao.com.br/mkt/emkt-regwall/icon_facebook.png' alt='' style='margin-bottom: 40px;'> </a> <a class='mh-s' target='_blank' href='https://www.instagram.com/estadao/'> <img height='40px' width='40px' src='https://assine.estadao.com.br/mkt/emkt-regwall/icon_instagram.png' alt='' style='margin-bottom: 40px;'> </a> <a class='mh-s' target='_blank' href='https://www.linkedin.com/company/estadao/'> <img height='40px' width='40px' src='https://assine.estadao.com.br/mkt/emkt-regwall/icon_linkedin.png' alt='' style='margin-bottom: 40px;'> </a> <a class='mh-s' target='_blank' href='https://www.tiktok.com/@estadao'> <img height='40px' width='40px' src='https://assine.estadao.com.br/mkt/emkt-regwall/icon_tiktok.png' alt='' style='margin-bottom: 40px;'> </a> </span> <span class='multi-line'> <a class='mh-s' target='_blank' href='https://twitter.com/Estadao'> <img height='40px' width='40px' src='https://assine.estadao.com.br/mkt/emkt-regwall/icon_twitter.png' alt='' style='margin-bottom: 40px;'> </a> <a class='mh-s' target='_blank' href='https://www.youtube.com/user/estadao/videos'> <img height='40px' width='40px' src='https://assine.estadao.com.br/mkt/emkt-regwall/icon_youtube.png' alt='' style='margin-bottom: 40px;'> </a> <a class='mh-s' target='_blank' href='https://brasil.estadao.com.br/blogs/estadao-podcasts/'> <img height='40px' width='40px' src='https://assine.estadao.com.br/mkt/emkt-regwall/icon_podcast.png' alt='' style='margin-bottom: 40px;'> </a> </span> </p></td></tr><tr> <td class=''><tr><td><table role='presentation' width='100%' align='center' style='border-spacing:0; text-align: center; background:#F2F2F2; padding-top:10px; padding-right:30px; padding-left:30px; padding-bottom:10px;'><tbody><tr style='display: flex;'> <td class='multi-line' style='width:25%;'><a href='https://chat.directtalk.com.br/static/?chatId=ee24070d-da56-40f7-872f-ca47bcef426a?utm_source=estadao:email-mkt&utm_medium=email-mkt&utm_campaign=boas-vindas-regwall:c&utm_content=link:::&utm_term=::::' target='_blank' display='block' style='font-size: 16px; font-weight:bold; line-height:20px; color:#2575E8; text-decoration: underline; display: inline-block;'>CHAT</a></td><td class='multi-line' style='width:50%;'><a href='https://meu.estadao.com.br/?utm_source=estadao:email-mkt&utm_medium=email-mkt&utm_campaign=boas-vindas-regwall:c&utm_content=link:::&utm_term=::::' target='_blank' display='block' style='font-size: 16px; font-weight:bold; line-height:20px; color:#2575E8; text-decoration: underline; display: inline-block;'>CENTRAL DE ATENDIMENTO</a></td><td class='multi-line' style='width:25%;'><a href='https://api.whatsapp.com/send?phone=551140035323?utm_source=estadao:email-mkt&utm_medium=email-mkt&utm_campaign=boas-vindas-regwall:c&utm_content=link:::&utm_term=::::' target='_blank' display='block' style='font-size: 16px; font-weight:bold; line-height:20px; color:#2575E8; text-decoration: underline; display: inline-block;'>WHATSAPP</a></td></tr></td></tr></tbody> </table> <div> <p class='text-xs-midnight-blue-regular-14 mh-xl' style='margin-top: 20px;'>Você está recebendo esta mensagem porque se cadastrou ou tem relacionamento com alguma das empresas do Grupo Estado. </p></div><div class='footer2'><tr> <td class='header'> <a href='https://estadao.com.br?utm_source=estadao:email-mkt&utm_medium=email-mkt&utm_campaign=boas-vindas-regwall:c&utm_content=link:logo-inferior-boas-vindas-regwall::&utm_term=::::' target='_blank'> <img class='logo' src='https://assine.estadao.com.br/mkt/emkt-regwall/grupo%203288.png' alt='Estadão'> </a></td></tr></div></div></div></td><td>&nbsp;</td></tr></tbody> </table></body></html>"
-
-                        var dataEmail = {
-                            "from_email": "assineagora@assine.estadao.com",
-                            "from_name": "Estadão",
-                            "to_email": bodyApi["email_login"],
-                            "to_name": `${bodyApi["nome"]} ${bodyApi["sobrenome"]}`,
-                            "cc": "",
-                            "bcc": "",
-                            "subject": "Seu cadastro foi realizado com sucesso.",
-                            "message": bodyEmail,
-                        }
-
-                        var sendEmail = await consumeApi(dataEmail, "https://api.estadao.com.br/users/mail/send");
+                        setCookies(cookies);
 
                         offers.classList.add("visually-hidden");
                         changeScreen(registerSuccess, registerScreen);
@@ -1729,7 +1751,6 @@
                 }
                 // Realiza Login
                 if (email_existe && formValid) {
-
                     bodyApi = dataForApiLogin(bodyApi);
                     if (inputs[i].value !== "") {
                         var loginByApi = await consumeApi(bodyApi, "https://api.estadao.com.br/users/login?with_cookie=true");
@@ -1737,11 +1758,8 @@
                         if (loginByApi.token) {
                             var cookies = loginByApi.cookies;
                             // cria cookies login
-                            for (let i = 0; i < cookies.length; i++) {
-                                var cookie = cookies[i];
-                                setCookie(cookie.name, cookie.value, cookie.expire)
-                            }
-
+                            setCookies(cookies)
+                            
                             if (window.dataLayerEstadao) {
                                 window.dataLayerEstadao.push({
                                     event: "genericEvent",
@@ -1754,7 +1772,7 @@
                             document.location.reload(true);
                         }
 
-                        if (loginByApi.error.code == 400) {
+                        if (loginByApi.error) {
                             document.querySelector(".message_error").classList.remove("visually-hidden");
                             document.querySelector(".message_error").innerHTML = `${loginByApi.error.message}`;
                         }
@@ -1764,36 +1782,6 @@
             }
 
         });
-
-        var setCookie = (name, value, days) => {
-            var url = window.location.host;
-            var resultado = url.split(".");
-            if (resultado.includes("www") == true) {
-                var retiraWWW = resultado.shift();
-            }
-            var urlSemWWW = resultado.join(".");
-            var urlCookie = "." + urlSemWWW;
-
-            if (resultado.includes("estadao") == true) {
-                var urlCookie = ".estadao.com.br";
-            }
-
-            var expires = "";
-            if (days) {
-                var date = new Date();
-                date.setTime(date.getTime() + days);
-                expires = "; expires=" + date.toUTCString();
-            }
-            document.cookie =
-                name +
-                "=" +
-                (value || "") +
-                expires +
-                ";domain=" +
-                urlCookie +
-                "; path=/";
-        }
-
 
         const iconPasswordLogin = document.querySelector('.icon-password-login');
         const iconPasswordRegister = document.querySelector('.icon-password-register');
@@ -1836,6 +1824,11 @@
 
     </script>
 
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W9P88XF"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    
 </body>
 
 </html>
