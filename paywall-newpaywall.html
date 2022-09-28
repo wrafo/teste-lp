@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Paywall - Web Components</title>
+    <title>Regwall - Copa do mundo</title>
 
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -16,10 +16,10 @@
     <!-- End Google Tag Manager -->
 
     <!-- CSS Stylesheet -->
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap-utilities.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
-
 </head>
 
 <style>
@@ -28,9 +28,13 @@
         --black: #000000;
         --blue-color-hover: #2E86C1;
         --blue-color: #2575e8;
+        --secondary-blue-color: #18519E;
         --gray-hover: #cccccc;
         --gray: #b1b1b1;
+        --bg-gray: #F9F9F9;
+        --border-gray:#E8E8E8;
         --green: #00bf07;
+        --btn-green: #529C40;
         --line-darkgray-color: #707070;
         --line-lightgray-color: #cccccc;
         --text-color: #2c2c2c;
@@ -78,7 +82,7 @@
         --bs-black-rgb: 0, 0, 0;
         --bs-body-color-rgb: 33, 37, 41;
         --bs-body-bg-rgb: 255, 255, 255;
-        --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        --bs-font-sans-serif: 'Lato', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
         --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
         --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
         --bs-body-font-family: var(--bs-font-sans-serif);
@@ -90,14 +94,31 @@
     }
 
     /* Generals */
-    body,
-    a {
-        color: var(--text-color);
-    }
 
-    .regwall-row {
+    .row {
         margin-right: 0 !important;
         margin-left: 0 !important;
+    }
+
+    .btn-eleicoes {
+        display: inline-block;
+        font-weight: 400;
+        line-height: 1.5;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        vertical-align: middle;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+        background-color: var(--btn-green);
+        border: 1px solid var(--btn-green);
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        border-radius: 0.25rem;
+        transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        text-transform: uppercase;
     }
 
     .btn {
@@ -120,47 +141,13 @@
         transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     }
 
-    .btn-outline-light {
-        color: #f8f9fa;
-        border-color: #f8f9fa;
+    .btn-eleicoes:hover {
+        filter: brightness(120%);
+        -webkit-filter: brightness(120%);
+        color: white;
     }
 
-    .btn-outline-light:hover {
-        color: #000;
-        background-color: #f8f9fa;
-        border-color: #f8f9fa;
-    }
-
-    .btn-check:focus+.btn-outline-light,
-    .btn-outline-light:focus {
-        box-shadow: 0 0 0 0.25rem rgba(248, 249, 250, 0.5);
-    }
-
-    .btn-check:checked+.btn-outline-light,
-    .btn-check:active+.btn-outline-light,
-    .btn-outline-light:active,
-    .btn-outline-light.active,
-    .btn-outline-light.dropdown-toggle.show {
-        color: #000;
-        background-color: #f8f9fa;
-        border-color: #f8f9fa;
-    }
-
-    .btn-check:checked+.btn-outline-light:focus,
-    .btn-check:active+.btn-outline-light:focus,
-    .btn-outline-light:active:focus,
-    .btn-outline-light.active:focus,
-    .btn-outline-light.dropdown-toggle.show:focus {
-        box-shadow: 0 0 0 0.25rem rgba(248, 249, 250, 0.5);
-    }
-
-    .btn-outline-light:disabled,
-    .btn-outline-light.disabled {
-        color: #f8f9fa;
-        background-color: transparent;
-    }
-
-    .regwall-form-control {
+    .form-control {
         display: block;
         width: 100%;
         padding: 0.375rem 0.75rem;
@@ -183,7 +170,7 @@
         text-align: left;
     }
 
-    .form-floating>.regwall-form-control,
+    .form-floating>.form-control,
     .form-floating>.form-select {
         height: calc(3.5rem + 2px);
         line-height: 1.25;
@@ -203,31 +190,64 @@
 
     /* Wrappers */
 
-    .regwall-offers {
-        background-color: var(--blue-color);
-        background-image: url('https://www.estadao.com.br/paywall-zephr/assets/image/grade_bolas_azul.png');
+    .offers {
+        background-color: var(--bg-gray);
         background-position: top 3% left 5%;
         background-repeat: no-repeat;
     }
 
-    .regwall-offers .desktops {
-        height: 120px;
+    .offers .head-regwall {
+        height: 75px;
     }
 
     .gifts-subscription-image img {
         border-radius: 0 0 18px 18px;
     }
 
-    .subscription-regwall-offers .gifts-subscription a {
+    .subscription-offers .gifts-subscription a {
         color: var(--white);
     }
 
-    .subscription-regwall-offers.pt-3.mt-2.position-relative a {
+    .subscription-offers.pt-3.mt-2.position-relative a {
         color: #fff;
     }
 
+    .offers .eleicoes-title {
+        margin-top: 18px;
+        text-align: center;
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+
+    .offers .eleicoes-content {
+        flex-direction: column;
+        align-items: center;
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+
+    .offers .eleicoes-items {
+        border: 1px solid var(--border-gray);
+        background-color: white;
+        padding: 10px 18px 13px;
+        margin-bottom: 10px;
+    }
+
+    .offers .eleicoes-footer {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 20px 30px;
+        background-color: var(--secondary-blue-color);
+    }
+
+    .offers .eleicoes-footer .footer-text {
+        color: var(--white);
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
     /* Forms */
-    .form-floating>.regwall-form-control {
+    .form-floating>.form-control {
         height: 50px;
     }
 
@@ -349,7 +369,7 @@
     }
 
     /* CardsOffers */
-    .subscription-regwall-offers {
+    .subscription-offers {
         width: 160px;
         min-width: 160px;
         background-image: url('https://www.estadao.com.br/paywall-zephr/assets/image/efeito_card_promo.png');
@@ -364,11 +384,11 @@
         max-height: 220px;
     }
 
-    .subscription-regwall-offers, ::after {
+    .subscription-offers, ::after {
         box-sizing: border-box;
     }
 
-    .subscription-regwall-offers .badget-percent {
+    .subscription-offers .badget-percent {
         background-color: red;
         border-radius: 0% 45% 0% 50%;
         font-size: 10px;
@@ -378,32 +398,32 @@
         right: 0;
     }
 
-    .subscription-regwall-offers .title {
+    .subscription-offers .title {
         margin-bottom: 20px;
         margin-top: 25px;
         font-size: 12px;
         text-transform: uppercase;
     }
 
-    .subscription-regwall-offers .observation {
+    .subscription-offers .observation {
         font-size: 9px;
      }
 
-    .subscription-regwall-offers .price {
+    .subscription-offers .price {
         margin-bottom: 5px;
         font-size: 14px;
     }
 
-    .subscription-regwall-offers .price>span {
+    .subscription-offers .price>span {
         margin-left: 5px;
         margin-right: 5px;
     }
 
-    .subscription-regwall-offers .message {
+    .subscription-offers .message {
         font-size: 12px;
     }
 
-    .subscription-regwall-offers .gifts-subscription {
+    .subscription-offers .gifts-subscription {
         background-color: green;
         position: absolute;
         bottom: 0;
@@ -415,16 +435,12 @@
         align-items: center;
     }
 
-    .subscription-regwall-offers .gifts-subscription-image {
+    .subscription-offers .gifts-subscription-image {
         position: absolute;
         bottom: 0;
         width: 100%;
         border-radius: 0 0 16px 16px;
         left: 0;
-    }
-
-    .regwall-offers-desktop-image {
-        display: flex;
     }
 
     .fs-5 {
@@ -465,7 +481,7 @@
         box-sizing: border-box
     }
 
-    input.regwall-form-control.buttom__form, ::after {
+    input.form-control.buttom__form, ::after {
         box-sizing: border-box
     }
 
@@ -479,7 +495,7 @@
         margin-bottom: 0;
     }
 
-    .regwall-body {
+    body {
         margin: 0;
         font-family: var(--bs-body-font-family);
         font-size: var(--bs-body-font-size);
@@ -492,158 +508,9 @@
         -webkit-tap-highlight-color: transparent
     }
 
-    hr {
-        margin: 1rem 0;
-        color: inherit;
-        background-color: currentColor;
-        border: 0;
-        opacity: .25
-    }
-
-    hr:not([size]) {
-        height: 1px
-    }
-
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        margin-top: 0;
-        margin-bottom: .5rem;
-        font-weight: 500;
-        line-height: 1.2
-    }
-
-    h1 {
-        font-size: calc(1.375rem + 1.5vw)
-    }
-
-    @media (min-width:1200px) {
-        h1 {
-            font-size: 2.5rem
-        }
-    }
-
-    h2 {
-        font-size: calc(1.325rem + .9vw)
-    }
-
-    @media (min-width:1200px) {
-        h2 {
-            font-size: 2rem
-        }
-    }
-
-    h3 {
-        font-size: calc(1.3rem + .6vw)
-    }
-
-    @media (min-width:1200px) {
-        h3 {
-            font-size: 1.75rem
-        }
-    }
-
-    h4 {
-        font-size: calc(1.275rem + .3vw)
-    }
-
-    @media (min-width:1200px) {
-        h4 {
-            font-size: 1.5rem
-        }
-    }
-
-    h5 {
-        font-size: 1.25rem
-    }
-
-    h6 {
-        font-size: 1rem
-    }
-
-    p {
+    .p-title {
         margin-top: 0;
         margin-bottom: 1rem
-    }
-
-    abbr[data-bs-original-title],
-    abbr[title] {
-        -webkit-text-decoration: underline dotted;
-        text-decoration: underline dotted;
-        cursor: help;
-        -webkit-text-decoration-skip-ink: none;
-        text-decoration-skip-ink: none
-    }
-
-    address {
-        margin-bottom: 1rem;
-        font-style: normal;
-        line-height: inherit
-    }
-
-    ol,
-    ul {
-        /* padding-left: 2rem */
-    }
-
-    dl,
-    ol,
-    ul {
-        margin-top: 0;
-        margin-bottom: 1rem
-    }
-
-    ol ol,
-    ol ul,
-    ul ol,
-    ul ul {
-        margin-bottom: 0
-    }
-
-    dt {
-        font-weight: 700
-    }
-
-    dd {
-        margin-bottom: .5rem;
-        margin-left: 0
-    }
-
-    blockquote {
-        margin: 0 0 1rem
-    }
-
-    b,
-    strong {
-        font-weight: bolder
-    }
-
-    small {
-        font-size: .875em
-    }
-
-    mark {
-        padding: .2em;
-        background-color: #fcf8e3
-    }
-
-    sub,
-    sup {
-        position: relative;
-        font-size: .75em;
-        line-height: 0;
-        vertical-align: baseline
-    }
-
-    sub {
-        bottom: -.25em
-    }
-
-    sup {
-        top: -.5em
     }
 
     a {
@@ -655,131 +522,8 @@
         color: #0a58ca
     }
 
-    a:not([href]):not([class]),
-    a:not([href]):not([class]):hover {
-        color: inherit;
-        text-decoration: none
-    }
-
-    code,
-    kbd,
-    pre,
-    samp {
-        font-family: var(--bs-font-monospace);
-        font-size: 1em;
-        direction: ltr;
-        unicode-bidi: bidi-override
-    }
-
-    pre {
-        display: block;
-        margin-top: 0;
-        margin-bottom: 1rem;
-        overflow: auto;
-        font-size: .875em
-    }
-
-    pre code {
-        font-size: inherit;
-        color: inherit;
-        word-break: normal
-    }
-
-    code {
-        font-size: .875em;
-        color: #d63384;
-        word-wrap: break-word
-    }
-
-    a>code {
-        color: inherit
-    }
-
-    kbd {
-        padding: .2rem .4rem;
-        font-size: .875em;
-        color: #fff;
-        background-color: #212529;
-        border-radius: .2rem
-    }
-
-    kbd kbd {
-        padding: 0;
-        font-size: 1em;
-        font-weight: 700
-    }
-
-    img,
-    svg {
-        vertical-align: middle
-    }
-
-    table {
-        caption-side: bottom;
-        border-collapse: collapse
-    }
-
-    caption {
-        padding-top: .5rem;
-        padding-bottom: .5rem;
-        color: #6c757d;
-        text-align: left
-    }
-
-    th {
-        text-align: inherit;
-        text-align: -webkit-match-parent
-    }
-
-    tbody,
-    td,
-    tfoot,
-    th,
-    thead,
-    tr {
-        border-color: inherit;
-        border-style: solid;
-        border-width: 0
-    }
-
-    label {
-        display: inline-block
-    }
-
-    button {
-        border-radius: 0
-    }
-
-    button:focus:not(:focus-visible) {
-        outline: 0
-    }
-
-    button,
-    input,
-    optgroup,
-    select,
-    textarea {
-        margin: 0;
-        font-family: inherit;
-        font-size: inherit;
-        line-height: inherit
-    }
-
-    button,
-    select {
-        text-transform: none
-    }
-
     [role=button] {
         cursor: pointer
-    }
-
-    select {
-        word-wrap: normal
-    }
-
-    select:disabled {
-        opacity: 1
     }
 
     [list]::-webkit-calendar-picker-indicator {
@@ -800,103 +544,11 @@
         cursor: pointer
     }
 
-    ::-moz-focus-inner {
-        padding: 0;
-        border-style: none
-    }
-
-    textarea {
-        resize: vertical
-    }
-
-    fieldset {
-        min-width: 0;
-        padding: 0;
-        margin: 0;
-        border: 0
-    }
-
-    legend {
-        float: left;
-        width: 100%;
-        padding: 0;
-        margin-bottom: .5rem;
-        font-size: calc(1.275rem + .3vw);
-        line-height: inherit
-    }
-
-    @media (min-width:1200px) {
-        legend {
-            font-size: 1.5rem
-        }
-    }
-
-    legend+* {
-        clear: left
-    }
-
-    ::-webkit-datetime-edit-day-field,
-    ::-webkit-datetime-edit-fields-wrapper,
-    ::-webkit-datetime-edit-hour-field,
-    ::-webkit-datetime-edit-minute,
-    ::-webkit-datetime-edit-month-field,
-    ::-webkit-datetime-edit-text,
-    ::-webkit-datetime-edit-year-field {
-        padding: 0
-    }
-
-    ::-webkit-inner-spin-button {
-        height: auto
-    }
-
-    [type=search] {
-        outline-offset: -2px;
-        -webkit-appearance: textfield
-    }
-
-    ::-webkit-search-decoration {
-        -webkit-appearance: none
-    }
-
-    ::-webkit-color-swatch-wrapper {
-        padding: 0
-    }
-
-    ::-webkit-file-upload-button {
-        font: inherit
-    }
-
-    ::file-selector-button {
-        font: inherit
-    }
-
-    ::-webkit-file-upload-button {
-        font: inherit;
-        -webkit-appearance: button
-    }
-
-    output {
-        display: inline-block
-    }
-
-    iframe {
-        border: 0
-    }
-
-    summary {
-        display: list-item;
-        cursor: pointer
-    }
-
-    progress {
-        vertical-align: baseline
-    }
-
     [hidden] {
         display: none !important
     }
 
-    .wrapper-subscription-regwall-offers {
+    .wrapper-subscription-offers {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -904,7 +556,7 @@
         margin-bottom: 3rem;
     }
 
-    .subscription-regwall-offers-content-wrapper {
+    .subscription-offers-content-wrapper {
         pointer-events: none;
     }
 
@@ -919,7 +571,7 @@
             border-bottom: none;
         }
 
-        .wrapper-subscription-regwall-offers {
+        .wrapper-subscription-offers {
             flex-direction: column;
             display: flex;
             justify-content: center;
@@ -927,7 +579,7 @@
             margin-top: 0;
         }
 
-        .regwall-offers-desktop-image {
+        .offers-desktop-image {
             display: none;
         }
     }
@@ -938,7 +590,7 @@
             top: 426px;
         }
 
-        .regwall-offers {
+        .offers {
             margin-top: 24px;
         }
     }
@@ -960,14 +612,14 @@
 
 </style>
 
-<body class="regwall-body">
+<body>
 
     <div class="container">
         <div class="wrapper d-flex justify-content-center align-items-center" style="max-width: 700px; margin: 0 auto;">
-            <div class="row regwall-row">
+            <div class="row">
                 <div id="register-success" class="register-success visually-hidden">
                     <div class="d-flex justify-content-center align-items-center">
-                        <div class="row regwall-row py-5">
+                        <div class="row py-5">
                             <section class="d-flex justify-content-lg-start align-items-center flex-column text-center">
                                 <img src="https://www.estadao.com.br/paywall-zephr/assets/image/Confirma_Cadastro_ICO.png"
                                     alt="Ícone de confirmação do cadastro" class="m-2">
@@ -997,13 +649,9 @@
                         </div>
                     </div>
                     <div class="login">
-                        <span class="yellow-round-circle position-absolute badge rounded-circle bg-warning d-none d-lg-block d-xl-block">
-                            <b class="d-flex justify-content-center">Ou</b>
-                        </span>
-
                         <div class="d-flex justify-content-center align-items-start">
-                            <p class="py-4 text-center">
-                                Quer continuar lendo? <br />Cadastre-se e <b>GANHE 3 matérias grátis</b>, ou faça seu login.
+                            <p class="mt-4 py-2 text-center">
+                                Se já é assinante, faça seu login. Se não, cadastre-se para continuar
                             </p>
                         </div>
 
@@ -1012,13 +660,13 @@
                             <div class="visually-hidden message_error form-floating mb-3"></div>
 
                             <div class="form-floating mb-3">
-                                <input id="regwall_input_email" type="email" name="email_login" class="regwall-form-control buttom__form"
+                                <input id="regwall_input_email" type="email" name="email_login" class="form-control buttom__form"
                                     placeholder="E-mail" required>
                                 <small class="error__message"></small>
                             </div>
 
                             <div class="form-floating mb-3 no-verify d-none">
-                                <input name="password" type="password" class="regwall-form-control buttom__form no-verify"
+                                <input name="password" type="password" class="form-control buttom__form no-verify"
                                     id="floatingPasswordLogin" placeholder="Senha" required>
                                 <small class="error__message"></small>
                                 <div class="icon-password-login icon-password">
@@ -1052,42 +700,38 @@
                     </div>
 
                     <div id="register" class="register visually-hidden">
-                        <span class="position-absolute badge rounded-circle bg-warning d-none d-lg-block d-xl-block">
-                            <b class="d-flex justify-content-center">Ou</b>
-                        </span>
-
                         <div class="d-flex justify-content-center align-items-start flex-column">
                             <p class="pt-4 text-center fs-5 w-100">Faça seu cadastro para continuar</p>
-                            <a class="btn buttom__back w-100 mb-2 text-uppercase fw-bold text-end" style="font-size: 0.7rem;"> <i class="fa fa-angle-left" aria-hidden="true"></i> Voltar</a>
+                            <a class="btn buttom__back w-100 mb-2 text-uppercase fw-bold text-end" style="font-size: 0.7rem; padding: 0;"> <i class="fa fa-angle-left" aria-hidden="true"></i> Voltar</a>
                         </div>
 
                         <form id="form-register" action="" class="form text-center" style="margin: 0 15px;" novalidate>
                             <div class="form-floating mb-3">
-                                <input name="email_login" type="email" class="regwall-form-control buttom__form"
+                                <input name="email_login" type="email" class="form-control buttom__form"
                                     placeholder="E-mail" required>
                                 <small class="error__message"></small>
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input name="nome" type="text" class="regwall-form-control buttom__form"
+                                <input name="nome" type="text" class="form-control buttom__form"
                                     placeholder="Nome" required>
                                 <small class="error__message"></small>
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input name="sobrenome" type="text" class="regwall-form-control buttom__form"
+                                <input name="sobrenome" type="text" class="form-control buttom__form"
                                     placeholder="Sobrenome" required>
                                 <small class="error__message"></small>
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input name="telefone" id="telefone" type="text" class="regwall-form-control buttom__form"
+                                <input name="telefone" id="telefone" type="text" class="form-control buttom__form"
                                     placeholder="Telefone" required>
                                 <small class="error__message"></small>
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input name="password" type="password" class="regwall-form-control buttom__form"
+                                <input name="password" type="password" class="form-control buttom__form"
                                     id="floatingPasswordRegister" placeholder="Senha" required>
                                 <small class="error__message"></small>
                                 <div class="icon-password-register icon-password">
@@ -1124,19 +768,15 @@
                     </div>
 
                     <div class="change-password visually-hidden">
-                        <span class="position-absolute badge rounded-circle bg-warning d-none d-lg-block d-xl-block">
-                            <b class="d-flex justify-content-center">Ou</b>
-                        </span>
-
                         <div class="d-flex justify-content-center align-items-center flex-column">
-                            <p class="mt-2 w-75 text-center fs-4">Alterar Senha</p>
+                            <p class="mt-6 w-75 text-center fs-5">Alterar Senha</p>
                             <p class="py-4 w-75 text-center fs-5">Preencha o campo abaixo com o seu e-mail e receba o
                                 link para redefinição de senha.</p>
                         </div>
 
                         <form id="form-change-password" class="text-center" style="margin: 0 15px;">
                             <div class="form-floating mb-3">
-                                <input name="email" type="email" class="regwall-form-control buttom__form"
+                                <input name="email" type="email" class="form-control buttom__form"
                                     placeholder="E-mail">
                                 <small class="error__message"></small>
                             </div>
@@ -1148,10 +788,6 @@
                     </div>
 
                     <div id="change-password-success" class="change-password-success visually-hidden">
-                        <span class="position-absolute badge rounded-circle bg-warning d-none d-lg-block d-xl-block">
-                            <b class="d-flex justify-content-center">Ou</b>
-                        </span>
-
                         <div class="d-flex justify-content-center align-items-center flex-column">
                             <p class="mt-2 w-75 text-center fs-4">Alterar Senha</p>
                             <img src="https://www.estadao.com.br/paywall-zephr/assets/image/Troca_Senha_ICO.png"
@@ -1163,86 +799,48 @@
                     </div>
                 </section>
 
-                <section id="regwall-offers" class="regwall-offers col-md-7 col-12 pb-5">
-                    <div
-                        class="row regwall-row d-block d-sm-none position-absolute d-flex justify-content-center align-items-center w-100">
-                        <span
-                            class="position-absolute badge-responsive rounded-circle bg-warning d-flex justify-content-center align-items-center">
-                            Ou
-                        </span>
+                <section id="offers" class="offers col-md-7 col-12 px-0">
+                    <div class="row d-block d-sm-none position-absolute d-flex justify-content-center align-items-center w-100">
                     </div>
 
                     <div class="d-flex justify-content-center align-items-center">
-                        <p class="py-4 w-75 text-center text-white">Assine já e tenha acesso ilimitado ao Portal
-                            Estadão, APP Estadão e outros produtos.</p>
+                        <img src="https://www.estadao.com.br/paywall-zephr/assets/image/head_regwall.png"
+                        alt="Banner de Eleições 2022" class="head-regwall w-100">
                     </div>
 
-                    <div class="regwall-offers-desktop-image justify-content-center">
-                        <img src="https://www.estadao.com.br/paywall-zephr/assets/image/devices_desktop@2x.png"
-                            alt="Imagem de desktops, Smartphones, Tables e Notebook" class="desktops">
+                    <div class="eleicoes-title d-flex justify-content-center align-items-center">
+                        <p class="p-title fw-bold fs-5">
+                            Com o Estadão você se mantém Multiconectado
+                        </p>
                     </div>
 
-                    <div class="wrapper-subscription-regwall-offers">
-                        <a href="{{link-offer-card1-tab1}}?canal=PAY&referrer_url={{blaize.customData.referrer_url}}&paywall_dinamico={{link-identificador}}{{variante_teste-ab}}" id="{{event-ga-card1}}" class="" target="_blank" aria-label="Card de assine agora">
-                            <div class="subscription-regwall-offers pt-3 mt-2 position-relative">  
-                                <div class="badget-percent d-flex justify-content-center align-items-center flex-column">
-                                    <span class="discount-card-p text-decoration-none text-uppercase fw-bold">{{discount-card1-tab1}}</span>
-                                    <span class="discount-card-p text-uppercase fw-bold">{{text-discount-card1}}</span>
-                                </div>
-
-                                <div class="subscription-regwall-offers-content-wrapper d-flex justify-content-between flex-column">
-                                    <div class="regwall-offers-info position-relative mb-5 px-3">
-                                        <div class="title">
-                                            <span class="fw-bold text-uppercase">
-                                                {{title-card1-tab1}}
-                                            </span>
-                                        </div>
-                                        <div class="price d-flex justify-content-center align-items-center w-100">
-                                            <span class="fw-bold text-uppercase">
-                                                R$<span class="fs-3">{{price-card1-tab1}}{{price-cents-card1-tab1}}</span>/{{price-period-card1-tab1}}
-                                            </span>
-                                        </div>
-                                        <small class="observation fw-bold text-uppercase">{{subperiod-card1-tab1}}</small>
-                                    </div>
-                                    <div class="gifts-subscription">
-                                        <span class="fw-bold text-uppercase">
-                                            Assine Agora
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a href="{{link-offer-card2-tab1}}?canal=PAY&referrer_url={{blaize.customData.referrer_url}}&paywall_dinamico={{link-identificador}}{{variante_teste-ab}}" id="{{event-ga-card2}}" class="text-decoration-none text-uppercase fw-bold" target="_blank" aria-label="Link na imagem de promoções e brindes">
-                            <div class="subscription-regwall-offers pt-3 mt-2 px-4 position-relative">
-                                <div class="badget-percent d-flex justify-content-center align-items-center flex-column">
-                                    <span class="discount-card-p text-uppercase fw-bold">{{discount-card2-tab1}}</span>
-                                    <span class="discount-card-p text-uppercase fw-bold">{{text-discount-card2}}</span>
-                                </div>
-                                <div class="subscription-regwall-offers-content-wrapper d-flex justify-content-between flex-column">
-                                    <div class="regwall-offers-info position-relative mb-5">
-                                        <div class="title">
-                                            <span class="fw-bold text-uppercase">
-                                                {{title-card2-tab1}}
-                                            </span>
-                                        </div>
-                                        <div class="price d-flex justify-content-center align-items-center w-100">
-                                            <span class="fw-bold text-uppercase">
-                                                R$<span class="fs-3">{{price-card2-tab1}}{{price-cents-card2-tab1}}</span>/{{price-period-card2-tab1}}
-                                            </span>
-                                        </div>
-                                        <small class="observation fw-bold text-uppercase">{{subperiod-card2-tab1}}</small>
-                                    </div>
-                                    <div class="gifts-subscription-image">
-                                        <img src="{{img-link-card2-tab1}}" alt="Imagem de promoções e brindes" width="180">
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
+                    <div class="eleicoes-content d-flex">
+                        <span class="eleicoes-items">
+                            Notícias em <b>tempo real</b> no <b>site e aplicativo</b>
+                        </span>
+                        <span class="eleicoes-items">
+                            Um grande <b>time de colunistas</b>
+                        </span>
+                        <span class="eleicoes-items">
+                            Estadão Verifica: <b>Checagem de fatos do Estadão</b>
+                        </span>
+                        <span class="eleicoes-items">
+                            <b>TV Estadão e Podcasts</b> exclusivos
+                        </span>
+                        <span class="eleicoes-items">
+                            Jornal Digital: <b>O jornal impresso digitalizado</b>
+                        </span>
+                        <span class="eleicoes-items">
+                            Acervo: Todas as edições do jornal <b>desde 1875</b>
+                        </span>
                     </div>
 
-                    <div class="d-flex justify-content-center">
-                        <a target="_blank" href="{{link-offer-button}}?canal=PAY&referrer_url={{blaize.customData.referrer_url}}&paywall_dinamico={{link-identificador}}" id="{{event-ga-button}}" class="right-btn btn btn-outline-light w-75 fw-bolder"
+                    <div class="eleicoes-footer d-flex justify-content-center mt-4">
+                        <span class="footer-text">
+                            Leia, assista, ouça e compartilhe!
+                        </span>
+
+                        <a target="_blank" href="{{link-offer-button}}?canal=PAY&referrer_url={{blaize.customData.referrer_url}}&paywall_dinamico={{link-identificador}}" id="{{event-ga-button}}" class="right-btn btn-eleicoes w-100 fw-bolder"
                             aria-label="{{text-button}}">{{text-button}}</a>
                     </div>
                 </section>
@@ -1294,7 +892,7 @@
         const changePasswordSuccess = document.querySelector("#change-password-success");
         const registerSuccess = document.querySelector("#register-success");
         const registerScreen = document.querySelector("#register");
-        const offers = document.querySelector("#regwall-offers");
+        const offers = document.querySelector("#offers");
 
         const btnFormLogin = document.querySelector("#btn__form-login");
         const noVerify = document.querySelectorAll(".no-verify:not(input[name])");
